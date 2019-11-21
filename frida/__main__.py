@@ -1,12 +1,15 @@
 import sys
 import zaga
 
-mod = 'skada'
+default = 'skada'
 prepare = 0
 
-if len(sys.argv) > 1:
-    mod = sys.argv[1]
-if len(sys.argv) > 2:
-    prepare = True
 
-zaga.run('mod/%s.js'%mod, None, prepare)
+def main(mod, prepare):
+    if len(sys.argv) > 1:
+        mod = sys.argv[1]
+    if len(sys.argv) > 2:
+        prepare = True
+    zaga.run('%s'%mod, None, prepare)
+
+main(default, prepare)
