@@ -2,10 +2,10 @@ import frida, sys
 import struct
 import sys
 
-def prepare():
+def _prepare():
     path_in = '../working/script.py'
-    path_out = '0_symbol.js'
-    path_template = '0_template.js'
+    path_out = 'common/symbol.js'
+    path_template = 'common/template.js'
 
     functions = []
     for i in open(path_in):
@@ -60,7 +60,7 @@ def b2f(a):
     b = struct.unpack('f',a)[0]
     return b
 
-def on_message_common(message, data):
+def _on_message(message, data):
     if message['type'] == 'send':
         msg = message['payload']
         if data == 'float':
@@ -74,19 +74,18 @@ def on_message_common(message, data):
         print(message)
 
 
-
 headerline = 200
 
-def run(jsname, on_message=None):
+def run(jsname, on_message=None, prepare=False):
     global headerline
-    if len(sys.argv) > 1:
-        prepare()
+    if prepare:
+        _prepare()
     if not on_message :
-        on_message = on_message_common
+        on_message = _on_message
     procname = 'com.nintendo.zaga'
     process = frida.get_usb_device().attach(procname)
-    commonjs = open('0_common.js').read()
-    symboljs = open('0_symbol.js').read()
+    commonjs = open('common/utils.js').read()
+    symboljs = open('common/symbol.js').read()
     lines = 0
     for i in commonjs:
         if i == '\n':
