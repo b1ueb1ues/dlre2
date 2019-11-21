@@ -10,6 +10,8 @@ def main(mod, prepare):
         mod = sys.argv[1]
     if len(sys.argv) > 2:
         prepare = True
+    if '.js' not in mod:
+        mod += '.js'
     zaga.run('%s'%mod, None, prepare)
 
 main(default, prepare)
