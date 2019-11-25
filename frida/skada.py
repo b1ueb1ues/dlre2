@@ -90,7 +90,7 @@ def on_message(message, data):
     global teams
     global t0
     if message['type'] == 'send':
-        if data == 'stderr':
+        if data == 'stderr' or data == b'stderr':
             sys.stderr.write("[*] {0}\n".format(message['payload']))
             t0 = time.time()
             teams = {}
