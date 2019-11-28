@@ -1,5 +1,3 @@
-
-
 def prepare():
     path_in = '../working/script.py'
     path_out = 'common/symbol.js'
@@ -41,3 +39,6 @@ def prepare():
             fout.write(lout)
         else:
             fout.write(line)
+
+if __name__ == '__main__':
+    prepare()

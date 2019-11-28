@@ -22,16 +22,16 @@ offset.chainctrl = {};
 offset.characterdamageintermediate = {};
 
 
-offset.characterbase.characterid = 0x104;
-offset.characterbase.dungeonpartyindex = 0x10c;
-offset.characterbase.dungeonpartyposition = 0x110;
-offset.characterbase.multiplayid = 0x118;
-offset.characterbase.charactertype = 0x124;
-offset.characterbase.characterparameter = 0x130;
+offset.characterbase.characterid = 0x11c;
+offset.characterbase.dungeonpartyindex = 0x124;
+offset.characterbase.dungeonpartyposition = 0x128;
+offset.characterbase.multiplayid = 0x130;
+offset.characterbase.charactertype = 0x13c;
+offset.characterbase.characterparameter = 0x148;
 
-offset.characterparameter.fptotal = 0x78;
+offset.characterparameter.fptotal = 0x88;
 
-offset.fluctuationparameter.abnormalresist = 0x58;
+offset.fluctuationparameter.abnormalresist = 0x60;
 
 offset.characterid.actorid = 0x10;
 offset.characterid.index = 0x11;
@@ -46,7 +46,7 @@ offset.damagestatus.value = 0x14;
 offset.damagestatus.iscrit = 0x18;
 
 offset.damagecalculation.normal = 0x10;
-offset.damagecalculation.coef = 0xf4;  //from collisionHitAttr$$get_DamageAdjustment
+offset.damagecalculation.coef = 0xf4;  //get from collisionHitAttr$$get_DamageAdjustment
 
 offset.attackhit.damage = 0x20;
 offset.attackhit.iscrit = 0x48;
@@ -101,9 +101,9 @@ offset.chainctrl.add = #ChainCtrl$$Add#;
  * return address
  */
 offset.characterbase.ret = {};
-offset.characterbase.ret.get_attack_2_dc_cbd = 0x015a0648;
+offset.characterbase.ret.get_attack_2_dc_cbd = 0x01778700;  // to calculationbasedamage
 offset.random.ret = {};
-offset.random.ret.rangefloat_2_dc_calculation = 0x0159f500;
-offset.random.ret.rangeint_2_dc_cbd = 0x015a07fc;
-offset.random.ret.rangeint_2_cb_ac = 0x0203a7e4;  // characterbuff$$applycommon
+offset.random.ret.rangefloat_2_dc_calculation = 0x017775b4;  
+offset.random.ret.rangeint_2_dc_cbd = 0x01778930;
+offset.random.ret.rangeint_2_cb_ac = 0x02328548;  // characterbuff$$applycommon
 

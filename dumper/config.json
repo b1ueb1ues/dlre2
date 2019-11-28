@@ -6,7 +6,7 @@
   "DumpFieldOffset": true,
   "DumpMethodOffset": true,
   "DumpTypeDefIndex": true,
-  "DummyDll": true,
+  "DummyDll": false,
   "MakeFunction": true,
   "ForceIl2CppVersion": false,
   "ForceVersion": 16
