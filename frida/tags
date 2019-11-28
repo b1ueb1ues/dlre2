@@ -1,0 +1,72 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+_on_message	zaga.py	/^def _on_message(message, data):$/;"	f
+attack	baz.js	/^var attack = 5000;$/;"	v
+attack	dummy.js	/^var attack = 0;$/;"	v
+attack	dummy.js	/^var attack = 2000;$/;"	v
+attack	gl.js	/^var attack = 0;$/;"	v
+attack	gl.js	/^var attack = 6000;$/;"	v
+attack	random.js	/^var attack = 0;$/;"	v
+attack	random.js	/^var attack = 2000;$/;"	v
+attack	skada.js	/^var attack = 0;$/;"	v
+attr	dl.js	/^var attr = 0;$/;"	v
+b2f	zaga.py	/^def b2f(a):$/;"	f
+c	an.js	/^var c = 1;$/;"	v
+ctx	an.js	/^var ctx = {};$/;"	v
+ctx	baz.js	/^var ctx = {};$/;"	v
+ctx	chainnum.js	/^var ctx = {};$/;"	v
+ctx	da.js	/^var ctx = {};$/;"	v
+ctx	dc.js	/^var ctx = {};$/;"	v
+ctx	dummy.js	/^var ctx = {};$/;"	v
+ctx	foo.js	/^var ctx = {};$/;"	v
+ctx	gl.js	/^var ctx = {};$/;"	v
+ctx	icon.js	/^var ctx = {};$/;"	v
+ctx	maxhp.js	/^var ctx = {};$/;"	v
+ctx	random.js	/^var ctx = {};$/;"	v
+default	__main__.py	/^default = 'skada'$/;"	v
+dummy	skada.js	/^var dummy = 0;$/;"	v
+follow	bar.js	/^function follow(p,offset){$/;"	f
+follow	dl.js	/^function follow(p,offset){$/;"	f
+follow	photon.js	/^function follow(p,offset){$/;"	f
+follow	seri.js	/^function follow(p,offset){$/;"	f
+gl	foo.js	/^var gl = 100;$/;"	v
+gl	photon.js	/^var gl = {};$/;"	v
+gl	seri.js	/^var gl = {};$/;"	v
+gl	skada.js	/^var gl = 0;$/;"	v
+headerline	zaga.py	/^headerline = 200$/;"	v
+ilbase	bar.js	/^var ilbase = Module.findBaseAddress('libil2cpp.so');$/;"	v
+ilbase	dl.js	/^var ilbase = Module.findBaseAddress('libil2cpp.so');$/;"	v
+ilbase	photon.js	/^var ilbase = Module.findBaseAddress('libil2cpp.so');$/;"	v
+ilbase	seri.js	/^var ilbase = Module.findBaseAddress('libil2cpp.so');$/;"	v
+invincible	baz.js	/^var invincible = 1;$/;"	v
+invincible	dummy.js	/^var invincible = 1;$/;"	v
+invincible	foo.js	/^var invincible = 1;$/;"	v
+invincible	gl.js	/^var invincible = 1;$/;"	v
+invincible	random.js	/^var invincible = 1;$/;"	v
+invincible	skada.js	/^var invincible = 0;$/;"	v
+main	__main__.py	/^def main(mod, prepare):$/;"	f
+np	dl.js	/^var np = ilbase.add(0x6b88c4);  \/\/ DamageCalculation$$CalculationBaseDamage$/;"	v
+offset	bar.js	/^var offset = 0;$/;"	v
+pb	bar.js	/^var pb = 0;$/;"	v
+pbuffer	bar.js	/^var pbuffer = 0;$/;"	v
+prepare	__main__.py	/^prepare = 0$/;"	v
+prepare	ida2frida.py	/^def prepare():$/;"	f
+printstat	baz.js	/^var printstat = 1;$/;"	v
+randomreplace	dl.js	/^var randomreplace = 0;$/;"	v
+readfloatret	bar.js	/^function readfloatret(r){$/;"	f
+readfloatret	dl.js	/^function readfloatret(r){$/;"	f
+recount	skada.js	/^function recount(type, dmg, iscrit, cha, src, dst){$/;"	f	function:function
+run	zaga.py	/^def run(jsname, on_message=None, prepare=False):$/;"	f
+se	bar.js	/^var se = 0;$/;"	v
+showresist	an.js	/^function showresist(resists){$/;"	f
+spread	da.js	/^function spread() {$/;"	f
+stockatt	baz.js	/^var stockatt = 0;$/;"	v
+tfloat	bar.js	/^var tfloat = [0x66,0x6c,0x6f,0x61,0x74];$/;"	v
+tfloat	dl.js	/^var tfloat = [0x66,0x6c,0x6f,0x61,0x74];$/;"	v
+tfloat	photon.js	/^var tfloat = [0x66,0x6c,0x6f,0x61,0x74];$/;"	v
+tfloat	seri.js	/^var tfloat = [0x66,0x6c,0x6f,0x61,0x74];$/;"	v
+tis	dl.js	/^var tis = 0;$/;"	v

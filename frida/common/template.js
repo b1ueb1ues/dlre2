@@ -1,5 +1,5 @@
 /**
- *  symbol table
+ *  var table
  */
 var offset = {};
 offset.characterbase = {};
@@ -22,46 +22,41 @@ offset.chainctrl = {};
 offset.characterdamageintermediate = {};
 
 
-offset.characterbase.characterid = 0x11c;
-offset.characterbase.dungeonpartyindex = 0x124;
-offset.characterbase.dungeonpartyposition = 0x128;
-offset.characterbase.multiplayid = 0x130;
-offset.characterbase.charactertype = 0x13c;
-offset.characterbase.characterparameter = 0x148;
+offset.characterbase.characterid = @CharacterBase,<characterId>@;
+offset.characterbase.dungeonpartyindex = @CharacterBase,<dungeonPartyIndex>@;
+offset.characterbase.dungeonpartyposition = @CharacterBase,<dungeonPartyPosition>@;
+offset.characterbase.multiplayid = @CharacterBase,<multiPlayId>@;
+offset.characterbase.charactertype = @CharacterBase,<type>@;
+offset.characterbase.characterparameter = @CharacterBase,<param>@;
 
-offset.characterparameter.fptotal = 0x88;
+offset.characterparameter.fptotal = @CharacterParameter,total@;
 
-offset.fluctuationparameter.abnormalresist = 0x60;
+offset.fluctuationparameter.abnormalresist = @FluctuationParameter,abnormalResist@;
 
-offset.characterid.actorid = 0x10;
-offset.characterid.index = 0x11;
+offset.characterid.actorid = @CharacterId,actorId@;
+offset.characterid.index = @CharacterId,index@;
 
-offset.collisionhitattribute.actionhitexectype = 0xc0;
-offset.collisionhitattribute.owner = 0x30;  //get
-offset.collisionhitattribute.charactertype = 0x9c;  //get
-offset.collisionhitattribute.actionid = 0xa4;  //get
-offset.collisionhitattribute.skillid = 0xa8;  //get
+offset.collisionhitattribute.actionhitexectype = @CollisionHitAttribute,_HitExecType@;
 
-offset.damagestatus.value = 0x14;
-offset.damagestatus.iscrit = 0x18;
+offset.damagestatus.value = @DamageStatus,<value>@;
+offset.damagestatus.iscrit = @DamageStatus,<isCritical>@;
 
-offset.damagecalculation.normal = 0x10;
-offset.damagecalculation.coef = 0xf4;  //get from collisionHitAttr$$get_DamageAdjustment
+offset.damagecalculation.normal = @DamageCalculation,normal@;
 
-offset.attackhit.damage = 0x20;
-offset.attackhit.iscrit = 0x48;
+offset.attackhit.damage = @AttackHit,damage@;
+offset.attackhit.iscrit = @AttackHit,isCritical@;
 
-offset.maingameleavealonechecker.warnningtime = 0x28;
-offset.maingameleavealonechecker.exittime = 0x2c;
+offset.maingameleavealonechecker.warnningtime = @MainGameLeaveAloneChecker,_warnningTime@;
+offset.maingameleavealonechecker.exittime = @MainGameLeaveAloneChecker,_exitTime@;
 
-offset.slipdamage.type = 0x20
-offset.slipdamage.damage = 0x24
-offset.slipdamage.attacker = 0x28
+offset.slipdamage.type = @SlipDamage,type@;
+offset.slipdamage.damage = @SlipDamage,damage@;
+offset.slipdamage.attacker = @SlipDamage,attacker@;
 
-offset.characterdamageintermediate.damage = 0x10;
-offset.characterdamageintermediate.damageowner = 0x20;
-offset.characterdamageintermediate.attackhit = 0x30;
-offset.characterdamageintermediate.collisionhitattribute = 0x38;
+offset.characterdamageintermediate.damage = @CharacterDamageIntermediate,damage@;
+offset.characterdamageintermediate.damageowner = @CharacterDamageIntermediate,damageOwner@;
+offset.characterdamageintermediate.attackhit = @CharacterDamageIntermediate,<attackHit>@;
+offset.characterdamageintermediate.collisionhitattribute = @CharacterDamageIntermediate,<hitAttr>@;
 
 /**
  * functions table
@@ -107,3 +102,11 @@ offset.random.ret.rangefloat_2_dc_calculation = 0x017775b4;
 offset.random.ret.rangeint_2_dc_cbd = 0x01778930;
 offset.random.ret.rangeint_2_cb_ac = 0x02328548;  // characterbuff$$applycommon
 
+/**
+ * manual get
+ */
+offset.damagecalculation.coef = 0xf4;  //get from collisionHitAttr$$get_DamageAdjustment
+offset.collisionhitattribute.owner = 0x30;  //get
+offset.collisionhitattribute.charactertype = 0x9c;  //get
+offset.collisionhitattribute.actionid = 0xa4;  //get
+offset.collisionhitattribute.skillid = 0xa8;  //get
