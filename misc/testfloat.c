@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int f2h(float b){
-    char * pb = 0;
+    char *pb = 0;
     pb = &b;
     for(int i=0;i<=1;i++){
             b = b+0;
@@ -10,7 +10,7 @@ int f2h(float b){
 }
 
 int i2f(int a){
-    float * pa = 0;
+    float *pa = 0;
     pa = &a;
     printf("%.20f\n",*pa);
 }
@@ -39,7 +39,10 @@ int main(){
 
 int main(){
     int a = 0;
-    scanf("%d",&a);
-    i2f(0x3fd55555);
-    scanf("%d",&a);
+    //scanf("%d",&a);
+    //i2f(0x3f800000);
+    i2f(-221205376);
+    f2h(0.7);
+    f2h(1.3);
+    //scanf("%d",&a);
 }

@@ -2,9 +2,10 @@ import struct
 import math
 
 def main():
+    b2f(0x00a2bc0f)
+    exit()
     f2b(141.0)
     b2f(0x7f59985b40)
-    exit()
     b2f(0x7f59985480)
     b2f(0x3fc00000)
     b2f(0x3f866666)
@@ -37,13 +38,13 @@ def f2b(a):
     a = struct.pack('f',a)
     b = struct.unpack('4s',a)
     b = b[0]
-    print "0x%02x%02x%02x%02x"%(ord(b[3]),ord(b[2]),ord(b[1]),ord(b[0]))
+    print("0x%02x%02x%02x%02x"%(ord(b[3]),ord(b[2]),ord(b[1]),ord(b[0])))
 
 def d2b(a):
     a = struct.pack('d',a)
     b = struct.unpack('8s',a)
     b = b[0]
-    print "%02x%02x%02x%02x%02x%02x%02x%02x"%(ord(b[7]),ord(b[6]),ord(b[5]),ord(b[4]),ord(b[3]),ord(b[2]),ord(b[1]),ord(b[0]))
+    print( "%02x%02x%02x%02x%02x%02x%02x%02x"%(ord(b[7]),ord(b[6]),ord(b[5]),ord(b[4]),ord(b[3]),ord(b[2]),ord(b[1]),ord(b[0])) )
 
 
 def b2f(a):
@@ -54,9 +55,9 @@ def b2f(a):
     s[2] = chr(int(a[4:6],16))
     s[3] = chr(int(a[6:8],16))
     s = "%s%s%s%s"%(s[3],s[2],s[1],s[0])
-    a = struct.pack('4s',s)
+    a = struct.pack('4s',s.encode())
     b = struct.unpack('f',a)[0]
-    print b
+    print(b)
 
 def b2d(a):
     a = "%016x"%a
@@ -72,7 +73,7 @@ def b2d(a):
     s = "%s%s%s%s%s%s%s%s"%(s[7],s[6],s[5],s[4],s[3],s[2],s[1],s[0])
     a = struct.pack('8s',s)
     b = struct.unpack('d',a)[0]
-    print b
+    print(b)
 
 
 main()

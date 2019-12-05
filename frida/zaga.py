@@ -1,7 +1,7 @@
 import frida, sys
 import struct
 import sys
-from ida2frida import prepare as _prepare
+from symbol import prepare as _prepare
 
 
 def b2f(a):

@@ -1,14 +1,17 @@
 var tfloat = [0x66,0x6c,0x6f,0x61,0x74];
-function follow(p,offset){
-    p = p.add(offset);
-    p = p.readPointer();
-    return p
-}
 var tstderr = [0x73,0x74,0x64,0x65,0x72,0x72];
 function follow(p,offset){
     p = p.add(offset);
     p = p.readPointer();
     return p
+}
+function arrow(p,offset){
+    p = p.add(offset);
+    p = p.readPointer();
+    return p
+}
+function star(p){
+    return p.readPointer()
 }
 
 
@@ -65,3 +68,10 @@ function hook(address, process){
 }
 
 
+function bt(t){
+    var b = Thread.backtrace(t.context);
+    console.log('bt');
+    for (var i in b) {
+        console.log(ptr(b[i]).add(0-ilbase));
+    }
+}

@@ -272,7 +272,7 @@ offset.characterbase.recoverysp
 ,{
     onEnter: function(args){
         console.log('** sp: '+args[1].toInt32());
-        this.context.r1 = 20000;
+        this.context.x1 = 20000;
     },
     onLeave: function(retval){
     }
