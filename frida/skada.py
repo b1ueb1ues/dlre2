@@ -10,7 +10,6 @@ def get_symbol():
     global skillname, charaname, enemyskill
     f = open('recount/textlabel.asset')
     data = f.read()
-#r = re.findall(r'CHARA_NAME_(\d+)\n.*_Text = "(.*)"', data, re.MULTILINE)
     tmp = re.findall(r'CHARA_NAME_(\d+)"\n.*_Text = "(.*)"', data, re.MULTILINE)
     for i in tmp:
         charaname[i[0]] = i[1]
@@ -122,7 +121,7 @@ def on_message(message, data):
     if message['type'] == 'send':
         if data == 'stderr' or data == b'stderr':
             sys.stderr.write("[*] {0}\n".format(message['payload']))
-            t0 = time.time()
+            t0 = time.time()-3
             teams = {}
             return
         if not t0:
