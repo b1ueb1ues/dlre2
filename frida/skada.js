@@ -99,6 +99,7 @@ function recount(type, dmg, iscrit, cha, src, dst){
 
 
     //from = ci+'['+ct+'|'+dpi+'.'+dpp+'.'+aid+'.'+idx+']'
+    //var from = '<'+ci+'>'+' ,[,'+ ct+','+dpi+','+dpp+','+aid+','+idx   +',]' ;
     var from = ci+' ,[,'+ ct+','+dpi+','+dpp+','+aid+','+idx   +',]' ;
 
     cb = dst
@@ -115,6 +116,7 @@ function recount(type, dmg, iscrit, cha, src, dst){
         aid = -1;
         idx = -1;
     }
+    //var to = '<'+ci+'>'+':['+ ct+'|'+dpi+'.'+dpp+'.'+aid+'.'+idx +']' ;
     var to = ci+':['+ ct+'|'+dpi+'.'+dpp+'.'+aid+'.'+idx +']' ;
 
     var skada = ''

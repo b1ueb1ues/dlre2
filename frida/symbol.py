@@ -97,6 +97,7 @@ def var(line):
     for i in classes[classname]:
         if varname in i[0]:
             lout = line.replace('@%s@'%part[1], i[1])
+            break
     return lout
 
 

@@ -53,7 +53,7 @@ offset.slipdamage.type = 0x20;
 offset.slipdamage.damage = 0x24;
 offset.slipdamage.attacker = 0x28;
 
-offset.characterdamageintermediate.damage = 0x20;
+offset.characterdamageintermediate.damage = 0x10;
 offset.characterdamageintermediate.damageowner = 0x20;
 offset.characterdamageintermediate.attackhit = 0x30;
 offset.characterdamageintermediate.collisionhitattribute = 0x38;

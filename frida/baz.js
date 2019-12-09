@@ -33,23 +33,19 @@ offset.characterbase.get_attack
     }
 });
 
-
 hook(
 offset.characterbase.get_defense
 ,{
     onEnter: function(args){
         var tis = args[0];
-        var cp = tis.add(0x148).readPointer();
-        var fptotal = cp.add(0x88).readPointer();
+        var cp = arrow(cp, 0x148);
+        var fptotal = arrow(cp, 0x88);
         var defense = fptotal.add(0x30).readFloat();
         var defenseb = fptotal.add(0x34).readFloat();
-        console.log(defense);
-        console.log(defenseb);
-        //bt(this);
+        console.log('** defense: '+defense);
+        console.log('** defenseB: '+defenseb);
     },
     onLeave: function(retval){
-        //console.log( hexdump(ptr(this.context.sp).sub(0x30)) );
-        //console.log('** def:'+retval.readInt() );
     }
 }); 
 
@@ -57,24 +53,11 @@ hook(
 offset.characterbase.get_defcoef
 ,{
     onEnter: function(args){
-        console.log('** defcoef:'+ptr(args[0]).add(0x160).readFloat() );
+        console.log('** defcoef: '+ptr(args[0]).add(0x160).readFloat() );
     },
     onLeave: function(retval){
     }
 }); 
-
-
-//hook(
-//    //0x19AB0D4
-//0x17798bc
-//,{
-//    onEnter: function(args){
-//    },
-//    onLeave: function(retval){
-//        console.log('cdp:'+retval.readFloat());
-//        console.log('** cdp:'+ilbase.add(0x658f4e8).readInt());
-//    }
-//}); 
 
 hook(
 offset.characterbase.recoverysp

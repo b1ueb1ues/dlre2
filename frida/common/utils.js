@@ -10,6 +10,16 @@ function arrow(p,offset){
     p = p.readPointer();
     return p
 }
+function arrowint(p,offset){
+    p = p.add(offset);
+    p = p.readInt();
+    return p
+}
+function arrowfloat(p,offset){
+    p = p.add(offset);
+    p = p.readFloat();
+    return p
+}
 function star(p){
     return p.readPointer()
 }

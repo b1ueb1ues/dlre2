@@ -1,6 +1,27 @@
 import zaga
 import time
 import sys
+import re
+
+skillname = {}
+charaname = {}
+enemyskill = {}
+def get_symbol():
+    global skillname, charaname, enemyskill
+    f = open('recount/textlabel.asset')
+    data = f.read()
+#r = re.findall(r'CHARA_NAME_(\d+)\n.*_Text = "(.*)"', data, re.MULTILINE)
+    tmp = re.findall(r'CHARA_NAME_(\d+)"\n.*_Text = "(.*)"', data, re.MULTILINE)
+    for i in tmp:
+        charaname[i[0]] = i[1]
+    tmp = re.findall(r'SKILL_NAME_(\d+)"\n.*_Text = "(.*)"', data, re.MULTILINE)
+    for i in tmp:
+        skillname[i[0]] = i[1]
+    tmp = re.findall(r'ENEMY_SKILL.*_(\d+)"\n.*_Text = "(.*)"', data, re.MULTILINE)
+    for i in tmp:
+        enemyskill[i[0]] = i[1]
+    f.close()
+
 
 
 t0 = 0
@@ -14,8 +35,9 @@ class Nilds(object):
 
 class Ds(object):
     dpsrange = 5
-    def __init__(this):
+    def __init__(this, name=''):
         global t0
+        this.name = name
         this.sum = 0
         this.cur = 0
         this.timedmg = [(0,0)]
@@ -50,12 +72,12 @@ class Team(object):
         this.member = {}
         this.midx = []
 
-    def add(this, timenow, idx, dmg):
+    def add(this, timenow, idx, dmg, name=''):
         if idx < 0:
             idx = -10 - idx
         if idx not in this.member:
             this.midx.append(idx)
-            this.member[idx] = Ds()
+            this.member[idx] = Ds(name)
         this.member[idx].add(timenow, dmg)
         this.dt = timenow - this.t0
 
@@ -82,6 +104,13 @@ class Team(object):
             ret += ', '
         ret += ',]'
         return ret
+    
+    def dps_src(this):
+        ret = ',{'
+        for i in this.midx:
+            ret += ' '+this.member[i].name
+        ret += '}'
+        return ret
 
 
 
@@ -89,6 +118,7 @@ teams = {}
 def on_message(message, data):
     global teams
     global t0
+    global skillname, charaname, enemyskill
     if message['type'] == 'send':
         if data == 'stderr' or data == b'stderr':
             sys.stderr.write("[*] {0}\n".format(message['payload']))
@@ -101,10 +131,19 @@ def on_message(message, data):
         tn = time.time()
         p = p%(tn)
         line = p.split(',')
+        srcid = line[2].strip()
+        if srcid in charaname:
+            cname = charaname[srcid]
+        else:
+            cname = ''
         dmg = int(line[-1])
         teamno = line[5]
         dst = line[10]
+        dstid = dst[2:].split(':')[0]
         teamdst = teamno+dst
+        actionid = line[11][1:-1]
+        skillid = line[12][1:-1]
+
 
         if line[7]==255 :
             inteamno = line[7]
@@ -116,7 +155,7 @@ def on_message(message, data):
             teams[teamdst] = Team()
 
         t = teams[teamdst]
-        t.add(tn, int(inteamno), dmg)
+        t.add(tn, int(inteamno), dmg, cname)
 
         tmp = ','+teamno+':'
         for k in t.midx:
@@ -124,14 +163,25 @@ def on_message(message, data):
 
         tmp += t.dps_current()
         tmp += t.dps_total()
+        tmp += t.dps_src()
+
+        tmp += ','
+        tmp += cname
+        if dstid in charaname:
+            tmp += ' '+charaname[dstid]
+        if skillid in skillname:
+            tmp += ' '+skillname[skillid]
+        if actionid in enemyskill:
+            tmp += ' '+enemyskill[actionid]
 
         p += tmp
         print(p)
         #debug{
-        sys.stderr.write(p+'\n')
+        sys.stderr.write(tmp+'\n')
         #}debug
     else:
         print(message)
 
 
+get_symbol()
 zaga.run('skada.js', on_message)
