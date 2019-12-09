@@ -1,3 +1,7 @@
+# config ####################
+DPSRANGE = 5
+
+#############################
 import zaga
 import time
 import sys
@@ -6,25 +10,22 @@ import re
 skillname = {}
 charaname = {}
 enemyskill = {}
+t0 = 0
+
 def get_symbol():
     global skillname, charaname, enemyskill
     f = open('recount/textlabel.asset')
     data = f.read()
-    tmp = re.findall(r'CHARA_NAME_(\d+)"\n.*_Text = "(.*)"', data, re.MULTILINE)
+    tmp = re.findall(r'CHARA_NAME_(\d+)"\n.*_Text = "(.*)"', data)
     for i in tmp:
         charaname[i[0]] = i[1]
-    tmp = re.findall(r'SKILL_NAME_(\d+)"\n.*_Text = "(.*)"', data, re.MULTILINE)
+    tmp = re.findall(r'SKILL_NAME_(\d+)"\n.*_Text = "(.*)"', data)
     for i in tmp:
         skillname[i[0]] = i[1]
-    tmp = re.findall(r'ENEMY_SKILL.*_(\d+)"\n.*_Text = "(.*)"', data, re.MULTILINE)
+    tmp = re.findall(r'ENEMY_SKILL.*_(\d+)"\n.*_Text = "(.*)"', data)
     for i in tmp:
         enemyskill[i[0]] = i[1]
     f.close()
-
-
-
-t0 = 0
-
 
 class Nilds(object):
     def dps_total(this):
@@ -33,7 +34,8 @@ class Nilds(object):
         return 0
 
 class Ds(object):
-    dpsrange = 5
+    global DPSRANGE
+    dpsrange = DPSRANGE
     def __init__(this, name=''):
         global t0
         this.name = name

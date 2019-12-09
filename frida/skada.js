@@ -1,7 +1,6 @@
 /**
  * skada start
  */
-var gl = 0;
 var invincible = 0;
 var attack = 0;
 var dummy = 0;
@@ -9,12 +8,11 @@ var dummy = 0;
 /**
  *  god like
  */
-//gl = 500;
 //attack = 5000;
 //invincible = 1;
 //dummy = 1;
 
-if(attack || gl){
+if(attack){
     invincible = 1;
 }
 
@@ -61,7 +59,6 @@ function recount(type, dmg, iscrit, cha, src, dst){
         var dot = 0;
     }
 
-
     if(dot){
         //cb = dst;
         var actionid = cha;
@@ -87,7 +84,6 @@ function recount(type, dmg, iscrit, cha, src, dst){
     var dpp =    cb.add(  o_cb.dungeonpartyposition    ).readInt(); 
     var p_mpid = cb.add(  o_cb.multiplayid             ).readPointer(); 
     
-
     if (p_mpid != 0){
         var aid = p_mpid.add( o_ci.actorid  ).readU8(); 
         var idx = p_mpid.add( o_ci.index    ).readU8(); 
@@ -96,9 +92,6 @@ function recount(type, dmg, iscrit, cha, src, dst){
         var aid = -1;
         var idx = -1;
     }
-
-
-    //from = ci+'['+ct+'|'+dpi+'.'+dpp+'.'+aid+'.'+idx+']'
     //var from = '<'+ci+'>'+' ,[,'+ ct+','+dpi+','+dpp+','+aid+','+idx   +',]' ;
     var from = ci+' ,[,'+ ct+','+dpi+','+dpp+','+aid+','+idx   +',]' ;
 
@@ -134,13 +127,18 @@ function recount(type, dmg, iscrit, cha, src, dst){
     //console.log(skada);
 }
 
+var firstline = 1;
 hook(
 offset.maingamectrl.playqueststart,
 {
     onEnter: function(args){
         send('',tstderr)
-        send('quest_start',tstderr)
-        console.log('\n=================');
+        send('quest_start\n==============================', tstderr)
+        if (firstline) {
+            firstline = 0;
+        } else {
+            console.log('\n==============================\n');
+        }
         console.log('timestamp,self/other,cid,[,ctype,didx,dposition,multiplay_id,multiplay_index,],dst,<actionid>,<skillid>,iscrit,dmg,who,:,time,:,dps');
        // tis = args[0]
        // igtime = follow(tis, 0x13c)
@@ -158,7 +156,6 @@ offset.maingamectrl.playqueststart,
     }
 });
 
-
 // afk
 hook(offset.maingameleavealonechecker.setleavealonetime, {
     onEnter: function(args){
@@ -172,29 +169,6 @@ hook(offset.maingameleavealonechecker.setleavealonetime, {
         tis.add(offset.maingameleavealonechecker.exittime).writeFloat(100000);
     }
 });
-
-if(dummy){
-    hook( offset.enemyctrl.setaiaction ,{
-        onEnter: function(args){
-            //console.log('onEnter:'+args[0]); //+args[0]);
-            this.context.x1 = 0;
-        },
-        onLeave: function(ret){
-        }
-    });
-}
-
-
-if(attack){
-    hook(offset.characterbase.get_attack, {  // CharacterBase$$get_attack
-        onEnter: function(args){
-        },
-        onLeave: function(retval){
-            retval.replace(attack);
-        }
-    });
-}
-
 
 //characterbase$$applyslipdamage
 hook(offset.characterbase.applyslipdamage, {
@@ -339,3 +313,23 @@ if(invincible){
     });
 }
 
+if(dummy){
+    hook( offset.enemyctrl.setaiaction ,{
+        onEnter: function(args){
+            //console.log('onEnter:'+args[0]); //+args[0]);
+            this.context.x1 = 0;
+        },
+        onLeave: function(ret){
+        }
+    });
+}
+
+if(attack){
+    hook(offset.characterbase.get_attack, {  // CharacterBase$$get_attack
+        onEnter: function(args){
+        },
+        onLeave: function(retval){
+            retval.replace(attack);
+        }
+    });
+}
