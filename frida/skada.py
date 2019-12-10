@@ -16,8 +16,8 @@ fpname = ''
 
 def get_symbol():
     global skillname, charaname, enemyskill
-    f = open('recount/textlabel.asset')
-    data = f.read()
+    f = open('recount/textlabel.asset','rb')
+    data = f.read().decode()
     tmp = re.findall(r'CHARA_NAME_(\d+)"\n.*_Text = "(.*)"', data)
     for i in tmp:
         charaname[i[0]] = i[1]
