@@ -20,7 +20,7 @@ offset.random = {};
 offset.enemyctrl = {};
 offset.chainctrl = {};
 offset.characterdamageintermediate = {};
-
+offset.datetime = {}
 
 offset.characterbase.characterid = @CharacterBase,<characterId>@;
 offset.characterbase.dungeonpartyindex = @CharacterBase,<dungeonPartyIndex>@;
@@ -61,6 +61,9 @@ offset.characterdamageintermediate.collisionhitattribute = @CharacterDamageInter
 /**
  * functions table
  */
+
+offset.datetime.get_utcnow = #DateTime$$get_UtcNow#;
+
 offset.damagecalculation.calculation = #DamageCalculation$$Calculation#;
 offset.damagecalculation.calculationbasedamage = #DamageCalculation$$CalculationBaseDamage#;
 

@@ -40,13 +40,13 @@ def run(jsname, on_message=None, prepare=False):
         on_message = _on_message
     procname = 'com.nintendo.zaga'
     process = frida.get_usb_device().attach(procname)
-    commonjs = open('common/utils.js').read()
     symboljs = open('common/symbol.js').read()
+    commonjs = open('common/utils.js').read()
     lines = 0
-    for i in commonjs:
+    for i in symboljs:
         if i == '\n':
             lines +=1
-    for i in symboljs:
+    for i in commonjs:
         if i == '\n':
             lines +=1
     padding = '\n'*(headerline - lines - 1)
@@ -55,7 +55,7 @@ def run(jsname, on_message=None, prepare=False):
 
     jscode = open(jsname).read()
     
-    jscode = commonjs + symboljs + padding + jscode
+    jscode = symboljs + commonjs + padding + jscode
 
  #   print(jscode)
  #   ln = 0;

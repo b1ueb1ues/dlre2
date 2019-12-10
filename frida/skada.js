@@ -1,4 +1,9 @@
 /**
+ * send t0 first
+ */
+send(get_time(),tfloat);
+
+/**
  * skada start
  */
 var invincible = 0;
@@ -112,7 +117,7 @@ function recount(type, dmg, iscrit, cha, src, dst){
     //var to = '<'+ci+'>'+':['+ ct+'|'+dpi+'.'+dpp+'.'+aid+'.'+idx +']' ;
     var to = ci+':['+ ct+'|'+dpi+'.'+dpp+'.'+aid+'.'+idx +']' ;
 
-    var skada = ''
+    var skada = get_time()+','
     if(iscrit){
         skada += type+','+ from +',';
         skada += '->'+to+','
@@ -127,19 +132,14 @@ function recount(type, dmg, iscrit, cha, src, dst){
     //console.log(skada);
 }
 
-var firstline = 1;
+
 hook(
 offset.maingamectrl.playqueststart,
 {
     onEnter: function(args){
-        send('',tstderr)
-        send('quest_start\n==============================', tstderr)
-        if (firstline) {
-            firstline = 0;
-        } else {
-            console.log('\n==============================\n');
-        }
-        console.log('timestamp,self/other,cid,[,ctype,didx,dposition,multiplay_id,multiplay_index,],dst,<actionid>,<skillid>,iscrit,dmg,who,:,time,:,dps');
+        send(get_time(),tfloat);
+        send('quest_start\n==============================', tstderr);
+        send('timestamp,self/other,cid,[,ctype,didx,dposition,multiplay_id,multiplay_index,],dst,<actionid>,<skillid>,iscrit,dmg,who,:,time,:,dps', tzero);
        // tis = args[0]
        // igtime = follow(tis, 0x13c)
        // sfdt = igtime.add(0x8).readFloat();
@@ -333,3 +333,5 @@ if(attack){
         }
     });
 }
+
+

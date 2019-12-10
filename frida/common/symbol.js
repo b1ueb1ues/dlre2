@@ -20,7 +20,7 @@ offset.random = {};
 offset.enemyctrl = {};
 offset.chainctrl = {};
 offset.characterdamageintermediate = {};
-
+offset.datetime = {}
 
 offset.characterbase.characterid = 0x11C;
 offset.characterbase.dungeonpartyindex = 0x124;
@@ -61,6 +61,9 @@ offset.characterdamageintermediate.collisionhitattribute = 0x38;
 /**
  * functions table
  */
+
+offset.datetime.get_utcnow = 0x2D862A0;
+
 offset.damagecalculation.calculation = 0x1777264;
 offset.damagecalculation.calculationbasedamage = 0x1777F98;
 

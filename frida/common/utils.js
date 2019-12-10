@@ -1,3 +1,4 @@
+var tzero = [0x30];
 var tfloat = [0x66,0x6c,0x6f,0x61,0x74];
 var tstderr = [0x73,0x74,0x64,0x65,0x72,0x72];
 function follow(p,offset){
@@ -85,3 +86,8 @@ function bt(t){
         console.log(ptr(b[i]).add(0-ilbase));
     }
 }
+
+var pfn = ilbase.add(offset.datetime.get_utcnow);
+var get_time = new NativeFunction(pfn,
+    'uint64', []);
+

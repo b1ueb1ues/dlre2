@@ -11,6 +11,8 @@ skillname = {}
 charaname = {}
 enemyskill = {}
 t0 = 0
+fout = None
+fpname = ''
 
 def get_symbol():
     global skillname, charaname, enemyskill
@@ -95,7 +97,8 @@ class Team(object):
         return ret
 
     def dps_current(this):
-        ret = ',(,%.2f,):[,'%(this.dt)
+        ret = ',(,%.2f,):'%(this.dt)
+        ret += ',['
         n = 5
         for i in this.midx:
             n -= 1
@@ -114,24 +117,47 @@ class Team(object):
         return ret
 
 
+def reset():
+    global fout, fpname
+    if fpname:
+        fname, ext = os.path.splitext(fpname)
+        fbasename = fname
+        count = 2
+        while os.path.exists(fname+ext):
+            fname = fbasename + '.%s'%count
+            count += 1
+        fout = open(fname+ext, 'w')
+    else:
+        fout = None
+
+
 
 teams = {}
 def on_message(message, data):
     global teams
     global t0
     global skillname, charaname, enemyskill
+    global fout
     if message['type'] == 'send':
-        if data == 'stderr' or data == b'stderr':
-            sys.stderr.write("[*] {0}\n".format(message['payload']))
-            t0 = time.time()-3
+        if data == 'float' or data == b'float':
+            t0 = int(message['payload'])
+            t0 = t0 / 10000 / 1000 - 3
             teams = {}
             return
-        if not t0:
-            t0 = time.time()-1
-        p = "%s, {0}".format(message['payload'])
-        tn = time.time()
-        p = p%(tn)
+        if data == '0' or data == b'0':
+            reset()
+            if fout:
+                fout.write(message['payload'])
+            else:
+                print(message['payload'])
+            return
+        if data == 'stderr' or data == b'stderr':
+            sys.stderr.write("[*] {0}\n".format(message['payload']))
+            return
+        #p = "{0}".format(message['payload'])
+        p = message['payload']
         line = p.split(',')
+        tn = int(line[0])/10000/1000
         srcid = line[2].strip()
         if srcid in charaname:
             cname = charaname[srcid]
@@ -158,13 +184,18 @@ def on_message(message, data):
         t = teams[teamdst]
         t.add(tn, int(inteamno), dmg, cname)
 
-        tmp = ','+teamno+':'
+        tmp = ', ,'+teamno+':'
         for k in t.midx:
             tmp += ' %02d'%(k)
 
-        tmp += t.dps_current()
-        tmp += t.dps_total()
-        tmp += t.dps_src()
+
+        cur = t.dps_current()
+        total = t.dps_total()
+        src = t.dps_src()
+
+        tmp += cur
+        tmp += total
+        tmp += src
 
         tmp += ','
         tmp += cname
@@ -176,13 +207,22 @@ def on_message(message, data):
             tmp += ' '+enemyskill[actionid]
 
         p += tmp
-        print(p)
+        if fout:
+            fout.write(p+'\n')
+        else:
+            print(p)
         #debug{
-        sys.stderr.write(tmp+'\n')
+        sys.stderr.write(cur+total+src+'\n')
         #}debug
     else:
         print(message)
 
+if __name__ == '__main__':
+    import os
+    if len(sys.argv) > 1:
+        fpname = sys.argv[1]
+    else:
+        fpname = None
 
-get_symbol()
-zaga.run('skada.js', on_message)
+    get_symbol()
+    zaga.run('skada.js', on_message)
