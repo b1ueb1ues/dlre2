@@ -1,4 +1,5 @@
 var tzero = [0x30];
+var tone = [0x31];
 var tfloat = [0x66,0x6c,0x6f,0x61,0x74];
 var tstderr = [0x73,0x74,0x64,0x65,0x72,0x72];
 function follow(p,offset){
@@ -88,6 +89,4 @@ function bt(t){
 }
 
 var pfn = ilbase.add(offset.datetime.get_utcnow);
-var get_time = new NativeFunction(pfn,
-    'uint64', []);
-
+var get_time = new NativeFunction(pfn, 'uint64', []);

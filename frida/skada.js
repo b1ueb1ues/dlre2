@@ -1,7 +1,7 @@
 /**
  * send t0 first
  */
-send(get_time(),tfloat);
+send(get_time(),tone);
 
 /**
  * skada start
@@ -137,7 +137,7 @@ hook(
 offset.maingamectrl.playqueststart,
 {
     onEnter: function(args){
-        send(get_time(),tfloat);
+        send(get_time(),tone);
         send('quest_start\n==============================', tstderr);
         send('timestamp,self/other,cid,[,ctype,didx,dposition,multiplay_id,multiplay_index,],dst,<actionid>,<skillid>,iscrit,dmg,who,:,time,:,dps', tzero);
        // tis = args[0]

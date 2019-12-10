@@ -139,7 +139,7 @@ def on_message(message, data):
     global skillname, charaname, enemyskill
     global fout
     if message['type'] == 'send':
-        if data == 'float' or data == b'float':
+        if data == '1' or data == b'1':
             t0 = int(message['payload'])
             t0 = t0 / 10000 / 1000 - 3
             teams = {}
