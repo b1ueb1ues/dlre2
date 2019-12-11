@@ -126,11 +126,13 @@ def reset():
         while os.path.exists(fname+ext):
             fname = fbasename + '.%s'%count
             count += 1
-        fout = open(fname+ext, 'w')
+        fout = open(fname+ext, 'wb')
     else:
         fout = None
 
 
+def fwrite(f, string):
+    f.write(string.encode('utf8'))
 
 teams = {}
 def on_message(message, data):
@@ -147,7 +149,7 @@ def on_message(message, data):
         if data == '0' or data == b'0':
             reset()
             if fout:
-                fout.write(message['payload'])
+                fwrite(fout, message['payload'])
             else:
                 print(message['payload'])
             return
@@ -208,7 +210,7 @@ def on_message(message, data):
 
         p += tmp
         if fout:
-            fout.write(p+'\n')
+            fwrite(fout, p+'\n')
         else:
             print(p)
         #debug{
