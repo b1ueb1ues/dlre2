@@ -141,7 +141,7 @@ def on_message(message, data):
     if message['type'] == 'send':
         if data == '1' or data == b'1':
             t0 = int(message['payload'])
-            t0 = t0 / 10000 / 1000 - 3
+            t0 = t0 / 10000 / 1000 + 3
             teams = {}
             return
         if data == '0' or data == b'0':
