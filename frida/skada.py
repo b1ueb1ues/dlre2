@@ -149,7 +149,7 @@ def on_message(message, data):
         if data == '0' or data == b'0':
             reset()
             if fout:
-                fwrite(fout, message['payload'])
+                fwrite(fout, message['payload']+'\n')
             else:
                 print(message['payload'])
             return
