@@ -18,13 +18,16 @@ def get_symbol():
     global skillname, charaname, enemyskill
     f = open('recount/textlabel.asset','rb')
     data = f.read().decode()
-    tmp = re.findall(r'CHARA_NAME_(\d+)"\n.*_Text = "(.*)"', data)
+    tmp = re.findall(r'CHARA_NAME_(\d+)".\n.*_Text = "(.*)"', data)
     for i in tmp:
         charaname[i[0]] = i[1]
-    tmp = re.findall(r'SKILL_NAME_(\d+)"\n.*_Text = "(.*)"', data)
+    tmp = re.findall(r'CHARA_NAME_COMMENT_(\d+)".\n.*_Text = "(.*)"', data)
+    for i in tmp:
+        charaname[i[0]] = i[1]
+    tmp = re.findall(r'SKILL_NAME_(\d+)".\n.*_Text = "(.*)"', data)
     for i in tmp:
         skillname[i[0]] = i[1]
-    tmp = re.findall(r'ENEMY_SKILL.*_(\d+)"\n.*_Text = "(.*)"', data)
+    tmp = re.findall(r'ENEMY_SKILL.*_(\d+)".\n.*_Text = "(.*)"', data)
     for i in tmp:
         enemyskill[i[0]] = i[1]
     f.close()
