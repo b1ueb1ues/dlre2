@@ -97,6 +97,9 @@ function recount(type, dmg, iscrit, cha, src, dst){
         var aid = -1;
         var idx = -1;
     }
+    if (type == 'cb::apsd'){
+        aid = -1;
+    }
     //var from = '<'+ci+'>'+' ,[,'+ ct+','+dpi+','+dpp+','+aid+','+idx   +',]' ;
     var from = ci+' ,[,'+ ct+','+dpi+','+dpp+','+aid+','+idx   +',]' ;
 
