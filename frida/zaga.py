@@ -1,4 +1,4 @@
-import frida, sys
+import frida
 import struct
 import sys
 from symbol import prepare as _prepare
@@ -32,7 +32,7 @@ def _on_message(message, data):
 
 headerline = 200
 
-def run(jsname, on_message=None, prepare=False):
+def run(jsname, on_message=None, prepare=False, keep=True):
     global headerline
     if prepare:
         _prepare()
@@ -67,7 +67,8 @@ def run(jsname, on_message=None, prepare=False):
     script.on('message', on_message)
     sys.stderr.write('[*] Running %s\n==============================\n'%jsname)
     script.load()
-    sys.stdin.read()
+    if keep:
+        sys.stdin.read()
 
 
 if __name__ == '__main__':

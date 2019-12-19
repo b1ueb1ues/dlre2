@@ -269,4 +269,10 @@ if __name__ == '__main__':
 
     get_symbol()
     reset()
-    zaga.run('skada.js', on_message)
+    zaga.run('skada.js', on_message, keep=False)
+    while 1:
+        input()
+        sys.stderr.write('reset\n')
+        reset()
+
+
