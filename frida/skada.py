@@ -58,10 +58,21 @@ class Ds(object):
         while this.timedmg[0][0] < this.dt-this.dpsrange:
             this.cur -= this.timedmg.pop(0)[1]
 
+    def refresh(this, timenow):
+        dt = timenow - this.t0
+        this.timedmg.append((dt, 0))
+        while this.timedmg[0][0] < dt-this.dpsrange:
+            this.cur -= this.timedmg.pop(0)[1]
+
     def dps_total(this):
         if this.dt <= 0:
             return '0'
         return '%d'%(this.sum / this.dt)
+
+    def dmg_sum(this):
+        if this.dt <= 0:
+            return '0'
+        return '%d'%(this.sum)
 
     def dps_current(this):
         if this.dt <= this.dpsrange:
@@ -79,7 +90,7 @@ class Team(object):
         this.midx = []
 
     def add(this, timenow, idx, dmg, name=''):
-        if idx < 0:
+        if idx < -9:
             idx = -10 - idx
         if idx not in this.member:
             this.midx.append(idx)
@@ -88,7 +99,7 @@ class Team(object):
         this.dt = timenow - this.t0
 
     def dps_total(this):
-        ret = ',{'
+        ret = ',dps_total:{'
         n = 5
         for i in this.midx:
             n -= 1
@@ -99,9 +110,23 @@ class Team(object):
         ret += ',}'
         return ret
 
+    def timing(this):
+        return ',(,%.2f,):'%(this.dt)
+
+    def dmg_sum(this):
+        ret = ',dmg_sum:{'
+        n = 5
+        for i in this.midx:
+            n -= 1
+            ret += ','+this.member[i].dmg_sum()
+        while n:
+            n -= 1
+            ret += ', '
+        ret += ',}'
+        return ret
+
     def dps_current(this):
-        ret = ',(,%.2f,):'%(this.dt)
-        ret += ',['
+        ret = ',dps_cur:{'
         n = 5
         for i in this.midx:
             n -= 1
@@ -109,7 +134,7 @@ class Team(object):
         while n:
             n -= 1
             ret += ', '
-        ret += ',]'
+        ret += ',}'
         return ret
     
     def dps_src(this):
@@ -176,11 +201,7 @@ def on_message(message, data):
         actionid = line[11][1:-1]
         skillid = line[12][1:-1]
 
-
-        if line[7]==255 :
-            inteamno = line[7]
-        else:
-            inteamno = line[7]+line[6]
+        inteamno = line[7]+line[6]
 
         #dp = line[5]+line[6]+line[7]+line[8]
         if teamdst not in teams:
@@ -194,10 +215,14 @@ def on_message(message, data):
             tmp += ' %02d'%(k)
 
 
+        timing = t.timing()
         cur = t.dps_current()
         total = t.dps_total()
+        _sum = t.dmg_sum()
         src = t.dps_src()
 
+        tmp += timing
+        tmp += _sum
         tmp += cur
         tmp += total
         tmp += src
@@ -217,7 +242,7 @@ def on_message(message, data):
         else:
             print(p)
         #debug{
-        sys.stderr.write(cur+total+src+'\n')
+        sys.stderr.write(src+timing+total+_sum+'\n')
         #}debug
     else:
         print(message)
