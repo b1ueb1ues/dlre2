@@ -204,6 +204,9 @@ def on_message(message, data):
             cname = charaname[srcid]
         else:
             cname = ''
+        if srcid == '-1':
+            cname = 'dot'
+
         dmg = int(line[-1])
         teamno = line[5]
         dst = line[10]
@@ -273,6 +276,7 @@ if __name__ == '__main__':
     while 1:
         input()
         sys.stderr.write('reset\n')
-        reset()
+        fout.close()
+        fout = None
 
 

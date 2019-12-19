@@ -100,6 +100,7 @@ function recount(type, dmg, iscrit, cha, src, dst){
     if (dot){
         dpp = 0;
         aid = 255;
+        ci = -1;
     }
     //var from = '<'+ci+'>'+' ,[,'+ ct+','+dpi+','+dpp+','+aid+','+idx   +',]' ;
     var from = ci+' ,[,'+ ct+','+dpi+','+dpp+','+aid+','+idx   +',]' ;
