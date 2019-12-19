@@ -143,8 +143,8 @@ offset.maingamectrl.playqueststart,
     onEnter: function(args){
         send(get_time(),tone);
         send('quest_start\n==============================', tstderr);
-        s = 'timestamp,self/other,cid,[,ctype,didx,dposition,multiplay_id,multiplay_index,],dst,<actionid>,<skillid>,iscrit,dmg,-,who:,'
-        s += '-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-'
+        var s = 'timestamp,self/other,cid,[,ctype,didx,dposition,multiplay_id,multiplay_index,],dst,<actionid>,<skillid>,iscrit,dmg'
+        s += ',-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-'
         send(s, tzero);
        // tis = args[0]
        // igtime = follow(tis, 0x13c)

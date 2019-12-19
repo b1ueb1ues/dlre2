@@ -55,8 +55,8 @@ class Ds(object):
         this.cur += dmg
         this.dt = timenow - this.t0
         this.timedmg.append((this.dt, dmg))
-        while this.timedmg[0][0] < this.dt-this.dpsrange:
-            this.cur -= this.timedmg.pop(0)[1]
+        #while this.timedmg[0][0] < this.dt-this.dpsrange:
+        #    this.cur -= this.timedmg.pop(0)[1]
 
     def refresh(this, timenow):
         dt = timenow - this.t0
@@ -75,8 +75,8 @@ class Ds(object):
         return '%d'%(this.sum)
 
     def dps_current(this):
-        if this.dt <= this.dpsrange:
-            return '0'
+        #if this.dt <= this.dpsrange:
+        #    return '0'
         return '%d'%(this.cur/this.dpsrange)
         #if(this.dt-this.timedmg[0][0]==0):
         #    return this.cur / this.dpsrange
@@ -96,6 +96,8 @@ class Team(object):
             this.midx.append(idx)
             this.member[idx] = Ds(name)
         this.member[idx].add(timenow, dmg)
+        for i in this.member.values():
+            i.refresh(timenow)
         this.dt = timenow - this.t0
 
     def dps_total(this):
@@ -111,7 +113,7 @@ class Team(object):
         return ret
 
     def timing(this):
-        return ',(,%.2f,):'%(this.dt)
+        return ',t:{,%.2f,}'%(this.dt)
 
     def dmg_sum(this):
         ret = ',dmg_sum:{'
@@ -138,19 +140,21 @@ class Team(object):
         return ret
     
     def dps_src(this):
-        ret = ',{'
+        ret = ',['
         for i in this.midx:
             ret += ' '+this.member[i].name
-        ret += '}'
+        ret += ']'
         return ret
 
 
 def reset():
     global fout, fpname
     if fpname:
-        fname, ext = os.path.splitext(fpname)
-        fbasename = fname
-        count = 2
+        fbasename, ext = os.path.splitext(fpname)
+        if not ext or ext=='':
+            ext = '.csv'
+        count = 1
+        fname = fbasename + '.0'
         while os.path.exists(fname+ext):
             fname = fbasename + '.%s'%count
             count += 1
@@ -210,10 +214,16 @@ def on_message(message, data):
         t = teams[teamdst]
         t.add(tn, int(inteamno), dmg, cname)
 
-        tmp = ', ,'+teamno+':'
-        for k in t.midx:
-            tmp += ' %02d'%(k)
+        tmp = ', '
 
+        tmp += ','
+        tmp += cname
+        if dstid in charaname:
+            tmp += ' '+charaname[dstid]
+        if skillid in skillname:
+            tmp += ' '+skillname[skillid]
+        if actionid in enemyskill:
+            tmp += ' '+enemyskill[actionid]
 
         timing = t.timing()
         cur = t.dps_current()
@@ -227,14 +237,10 @@ def on_message(message, data):
         tmp += total
         tmp += src
 
-        tmp += ','
-        tmp += cname
-        if dstid in charaname:
-            tmp += ' '+charaname[dstid]
-        if skillid in skillname:
-            tmp += ' '+skillname[skillid]
-        if actionid in enemyskill:
-            tmp += ' '+enemyskill[actionid]
+        tmp += ',team['+teamno+']:{'
+        for k in t.midx:
+            tmp += ' %02d'%(k)
+        tmp += '}'
 
         p += tmp
         if fout:
@@ -255,4 +261,5 @@ if __name__ == '__main__':
         fpname = None
 
     get_symbol()
+    reset()
     zaga.run('skada.js', on_message)
