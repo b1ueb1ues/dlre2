@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- encoding: utf8
 # config ####################
 DPSRANGE = 5
 
@@ -23,7 +25,12 @@ def get_symbol():
         charaname[i[0]] = i[1]
     tmp = re.findall(r'CHARA_NAME_COMMENT_(\d+)".\n.*_Text = "(.*)"', data)
     for i in tmp:
-        charaname[i[0]] = i[1]
+        charaname[i[0]] = i[1].replace(' ','') \
+                .replace('（','(') \
+                .replace('）',')') \
+                .replace('Ver.','') \
+                .replace('限定','')
+
     tmp = re.findall(r'SKILL_NAME_(\d+)".\n.*_Text = "(.*)"', data)
     for i in tmp:
         skillname[i[0]] = i[1]
