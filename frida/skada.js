@@ -102,7 +102,6 @@ function recount(type, dmg, iscrit, cha, src, dst){
         aid = 255;
         ci = -1;
     }
-    //var from = '<'+ci+'>'+' ,[,'+ ct+','+dpi+','+dpp+','+aid+','+idx   +',]' ;
     var from = ci+' ,[,'+ ct+','+dpi+','+dpp+','+aid+','+idx   +',]' ;
 
     cb = dst
@@ -119,20 +118,20 @@ function recount(type, dmg, iscrit, cha, src, dst){
         aid = -1;
         idx = -1;
     }
-    //var to = '<'+ci+'>'+':['+ ct+'|'+dpi+'.'+dpp+'.'+aid+'.'+idx +']' ;
     var to = ci+':['+ ct+'|'+dpi+'.'+dpp+'.'+aid+'.'+idx +']' ;
 
     var skada = get_time()+','
+    skada += type+','+ from +',';
+    skada += '->'+to+','
+    skada += '<'+actionid+'>,<'+skillid+'>,'
     if(iscrit){
-        skada += type+','+ from +',';
-        skada += '->'+to+','
-        skada += '<'+actionid+'>,<'+skillid+'>,critdmg: ,' + dmg;
+        skada += 'crit_dmg'
+    }else if(dot){
+        skada += 'dot_dmg'
     }else{
-        skada += type+','+ from +',';
-        skada += '->'+to+','
-        skada += '<'+actionid+'>,<'+skillid+'>,dmg: ,' + dmg;
+        skada += 'dmg'
     }
-    
+    skada +=': ,' + dmg;
     send(skada);
     //console.log(skada);
 }
@@ -220,14 +219,7 @@ hook(offset.characterbase.applydamage, {
     }
 });
 
-//hook(0xF279F8, {
-//    onEnter: function(args){
-//        console.log('formatter');
-//    },
-//    onLeave: function(ret){
-//    }
-//});
-//
+
 ////DamageCalculation$$Calculation
 //hook(offset.damagecalculation.calculation, {
 //    onEnter: function(args){
@@ -292,7 +284,7 @@ hook(offset.characterbase.applydamage, {
 
 
 
-
+// ----------------------------------------------------------------------------
 if(invincible){
     // CharacterBase$$IsInvincibleOnHitCheck
     hook(offset.characterbase.isinvincibleonhitcheck, { 
