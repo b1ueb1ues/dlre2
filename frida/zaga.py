@@ -32,10 +32,8 @@ def _on_message(message, data):
 
 headerline = 200
 
-def run(jsname, on_message=None, prepare=False, keep=True):
+def run(jsname, on_message=None):
     global headerline
-    if prepare:
-        _prepare()
     if not on_message :
         on_message = _on_message
     procname = 'com.nintendo.zaga'
@@ -52,23 +50,14 @@ def run(jsname, on_message=None, prepare=False, keep=True):
     padding = '\n'*(headerline - lines - 1)
     padding += 'var __padding__ = 0;\n'
 
-
     jscode = open(jsname).read()
     
     jscode = symboljs + commonjs + padding + jscode
 
- #   print(jscode)
- #   ln = 0;
- #   for i in jscode.split('\n'):
- #       ln += 1
- #       print ln, i
- #   exit()
     script = process.create_script(jscode)
     script.on('message', on_message)
     sys.stderr.write('[*] Running %s\n==============================\n'%jsname)
     script.load()
-    if keep:
-        sys.stdin.read()
 
 
 if __name__ == '__main__':

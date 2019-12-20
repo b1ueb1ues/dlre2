@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!python3
 # -*- encoding: utf8
 # config ####################
 DPSRANGE = 5
@@ -18,7 +18,7 @@ fpname = ''
 
 def get_symbol():
     global skillname, charaname, enemyskill
-    f = open('recount/textlabel.asset','rb')
+    f = open('textlabel.asset','rb')
     data = f.read().decode()
     tmp = re.findall(r'CHARA_NAME_(\d+)".\n.*_Text = "(.*)"', data)
     for i in tmp:
@@ -115,7 +115,7 @@ class Team(object):
             ret += ','+this.member[i].dps_total()
         while n:
             n -= 1
-            ret += ', '
+            ret += ',0'
         ret += ',}'
         return ret
 
@@ -130,7 +130,7 @@ class Team(object):
             ret += ','+this.member[i].dmg_sum()
         while n:
             n -= 1
-            ret += ', '
+            ret += ',0'
         ret += ',}'
         return ret
 
@@ -142,7 +142,7 @@ class Team(object):
             ret += ','+this.member[i].dps_current()
         while n:
             n -= 1
-            ret += ', '
+            ret += ',0'
         ret += ',}'
         return ret
     
@@ -272,11 +272,12 @@ if __name__ == '__main__':
 
     get_symbol()
     reset()
-    zaga.run('skada.js', on_message, keep=False)
+    zaga.run('skada.js', on_message)
     while 1:
         input()
-        sys.stderr.write('reset\n')
-        fout.close()
+        sys.stderr.write('fclose\n')
+        if fout:
+            fout.close()
         fout = None
 
 
