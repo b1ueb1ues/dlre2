@@ -1,6 +1,7 @@
 #!python3
 # -*- encoding: utf8
 # config ####################
+TEXTLABEL = 'common/textlabel.asset'
 DPSRANGE = 5
 
 #############################
@@ -18,7 +19,7 @@ fpname = ''
 
 def get_symbol():
     global skillname, charaname, enemyskill
-    f = open('common/textlabel.asset','rb')
+    f = open(TEXTLABEL,'rb')
     data = f.read().decode()
     tmp = re.findall(r'CHARA_NAME_(\d+)".\n.*_Text = "(.*)"', data)
     for i in tmp:
