@@ -247,10 +247,13 @@ def on_message(message, data):
         tmp += total
         tmp += src
 
-        tmp += ',team['+teamno+']:{'
+        teaminteamno = ''
+        teaminteamno += ',team['+teamno+']:{'
         for k in t.midx:
-            tmp += ' %02d'%(k)
-        tmp += '}'
+            teaminteamno += ' %02d'%(k)
+        teaminteamno += '}'
+        
+        tmp += teaminteamno
 
         p += tmp
         if fout:
@@ -258,7 +261,7 @@ def on_message(message, data):
         else:
             print(p)
         #debug{
-        sys.stderr.write(src+timing+total+_sum+'\n')
+        sys.stderr.write(timing[1:]+teaminteamno+src+total+_sum+'\n')
         #}debug
     else:
         print(message)
