@@ -99,11 +99,11 @@ offset.chainctrl.add = #ChainCtrl$$Add#;
  * return address
  */
 offset.characterbase.ret = {};
-offset.characterbase.ret.get_attack_2_dc_cbd = 0x01778700;  // to calculationbasedamage
+offset.characterbase.ret.get_attack_2_dc_cbd = 0x017d9f94;  // to calculationbasedamage
 offset.random.ret = {};
-offset.random.ret.rangefloat_2_dc_calculation = 0x017775b4;  
-offset.random.ret.rangeint_2_dc_cbd = 0x01778930;
-offset.random.ret.rangeint_2_cb_ac = 0x02328548;  // characterbuff$$applycommon
+offset.random.ret.rangefloat_2_dc_calculation = 0x017d8e48;  
+offset.random.ret.rangeint_2_dc_cbd = 0x017da1c4;
+offset.random.ret.rangeint_2_cb_ac = 0x02377914;  // characterbuff$$applycommon
 
 /**
  * manual get

@@ -98,8 +98,6 @@ class Team(object):
         this.midx = []
 
     def add(this, timenow, idx, dmg, name=''):
-        if idx < -9:
-            idx = -10 - idx
         if idx not in this.member:
             this.midx.append(idx)
             this.member[idx] = Ds(name)
@@ -209,21 +207,28 @@ def on_message(message, data):
             cname = 'dot'
 
         dmg = int(line[-1])
-        teamno = line[5]
+        teamno = line[4]+line[5]
         dst = line[10]
-        dstid = dst[2:].split(':')[0]
+        dstid, dstinid = dst[2:].split(':')
+        dsttype = dstinid[1]
         teamdst = teamno+dst
         actionid = line[11][1:-1]
         skillid = line[12][1:-1]
 
         inteamno = line[7]+line[6]
+        if line[7] == '-2':
+            idx = -2
+        else:
+            idx = int(inteamno)
+            if idx < -9:
+                idx = -10 - idx
 
         #dp = line[5]+line[6]+line[7]+line[8]
         if teamdst not in teams:
             teams[teamdst] = Team()
 
         t = teams[teamdst]
-        t.add(tn, int(inteamno), dmg, cname)
+        t.add(tn, idx, dmg, cname)
 
         tmp = ', '
 
@@ -262,7 +267,8 @@ def on_message(message, data):
         else:
             print(p)
         #debug{
-        sys.stderr.write(timing[1:]+teaminteamno+src+total+_sum+'\n')
+        if line[4] == '0' and dsttype=='1':
+            sys.stderr.write(timing[1:]+teaminteamno+src+total+_sum+'\n')
         #}debug
     else:
         print(message)

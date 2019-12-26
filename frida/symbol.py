@@ -26,7 +26,8 @@ def prepare():
 def get_classes(path_cs):
     global classes
     state = 0 # none
-    for i in open(path_cs):
+    for i in open(path_cs,'rb'):
+        i = i.decode()
         if state == 0:
             if ' class ' in i or i[:6]=='class ':
                 state = 1
@@ -53,7 +54,8 @@ def get_classes(path_cs):
 
 def get_functions(path_in):
     global functions
-    for i in open(path_in):
+    for i in open(path_in, 'rb'):
+        i = i.decode()
         if i[:10] != 'SetMethod(':
             continue
         end = i.find("')")

@@ -98,8 +98,9 @@ function recount(type, dmg, iscrit, cha, src, dst){
         var idx = -1;
     }
     if (dot){
+        ct = 0;
         dpp = 0;
-        aid = 255;
+        aid = -2;
         ci = -1;
     }
     var from = ci+' ,[,'+ ct+','+dpi+','+dpp+','+aid+','+idx   +',]' ;
