@@ -334,4 +334,12 @@ if(attack){
     });
 }
 
+//hook(offset.characterbase.get_attack, {  // CharacterBase$$get_attack
+//    onEnter: function(args){
+//    },
+//    onLeave: function(retval){
+//        console.log('-',retval.toInt32());
+//    }
+//});
+
 

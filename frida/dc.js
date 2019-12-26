@@ -27,6 +27,28 @@ var ctx = {};
 //    }
 //});
 
+hook(
+offset.damagecalculation.calculationbasedamage
+,{  //DamageCalculation$$CalculationBaseDamage
+    onEnter: function(args){
+    },
+    onLeave: function(retval){
+        console.log('basedmg: '+p2f(retval));
+        //retval.replace(f2i(10000.0));
+    }
+});
+
+
+hook(
+0x017da774
+,{  //DamageCalculation$$CalculationBaseDamage
+    onEnter: function(args){
+    },
+    onLeave: function(retval){
+        console.log('gethitattrdc: '+p2f(retval));
+    }
+});
+
 if(1){
 hook(
 offset.damagecalculation.calculation
