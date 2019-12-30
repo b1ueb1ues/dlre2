@@ -270,7 +270,7 @@ offset.random.rangefloat
 }
 
 
-if(1){
+if(0){
     // CharacterBase$$IsInvincibleOnHitCheck
     hook(offset.characterbase.isinvincibleonhitcheck, { 
         onEnter: function(args){

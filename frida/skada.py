@@ -58,7 +58,8 @@ class Ds(object):
         this.t0 = t0
         this.dt = 0
 
-    def add(this, timenow ,dmg):
+    def add(this, timenow ,dmg, name):
+        this.name = name
         this.sum += dmg
         this.cur += dmg
         this.dt = timenow - this.t0
@@ -91,9 +92,12 @@ class Ds(object):
         #return this.cur / (this.dt-this.timedmg[0][0])
 
 class Team(object):
-    def __init__(this):
+    def __init__(this, tn=None):
         global t0
-        this.t0 = t0
+        if tn:
+            this.t0 = tn
+        else:
+            this.t0 = t0
         this.member = {}
         this.midx = []
 
@@ -101,7 +105,7 @@ class Team(object):
         if idx not in this.member:
             this.midx.append(idx)
             this.member[idx] = Ds(name)
-        this.member[idx].add(timenow, dmg)
+        this.member[idx].add(timenow, dmg, name)
         for i in this.member.values():
             i.refresh(timenow)
         this.dt = timenow - this.t0
@@ -225,7 +229,7 @@ def on_message(message, data):
 
         #dp = line[5]+line[6]+line[7]+line[8]
         if teamdst not in teams:
-            teams[teamdst] = Team()
+            teams[teamdst] = Team(tn-1)
 
         t = teams[teamdst]
         t.add(tn, idx, dmg, cname)
