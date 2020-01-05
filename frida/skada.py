@@ -31,6 +31,16 @@ def get_symbol():
                 .replace('）',')') \
                 .replace('Ver.','') \
                 .replace('限定','')
+    tmp = re.findall(r'DRAGON_NAME_(\d+)".\n.*_Text = "(.*)"', data)
+    for i in tmp:
+        charaname[i[0]] = i[1]
+    tmp = re.findall(r'DRAGON_NAME_COMMENT_(\d+)".\n.*_Text = "(.*)"', data)
+    for i in tmp:
+        charaname[i[0]] = i[1].replace(' ','') \
+                .replace('（','(') \
+                .replace('）',')') \
+                .replace('Ver.','') \
+                .replace('限定','')
 
     tmp = re.findall(r'SKILL_NAME_(\d+)".\n.*_Text = "(.*)"', data)
     for i in tmp:
@@ -232,7 +242,7 @@ def on_message(message, data):
         tmp = ', '
 
         tmp += ','
-        tmp += cname
+        tmp += cname+'->'
         if dstid in charaname:
             tmp += ' '+charaname[dstid]
         if skillid in skillname:
