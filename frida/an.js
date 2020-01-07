@@ -72,28 +72,8 @@ hook(offset.actionconditionelement.get_rate, {
 });
 
 
-//random$$randomrangeInt
-hook(offset.random.randomrangeint, {
-    onEnter: function(args){
-        //if(args[1]==0 && args[2]==100){
-        //    this.replace = 1;
-        //}
-    },
-    onLeave: function(retval){
-        //if(this.replace == 1){
-        //    retval.replace(0);
-        //    console.log('replace random');
-        //}
-        //this.replace = 0;
-        if(ctx.setabs == 1){
-            retval.replace(3);
-            console.log('replace random');
-        }
-    }
-});
 
-
-if(1){
+if(0){
     // CharacterBase$$IsInvincibleOnHitCheck
     hook(offset.characterbase.isinvincibleonhitcheck, { 
         onEnter: function(args){

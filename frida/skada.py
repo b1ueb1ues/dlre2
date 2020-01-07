@@ -31,6 +31,16 @@ def get_symbol():
                 .replace('）',')') \
                 .replace('Ver.','') \
                 .replace('限定','')
+    tmp = re.findall(r'DRAGON_NAME_(\d+)".\n.*_Text = "(.*)"', data)
+    for i in tmp:
+        charaname[i[0]] = i[1]
+    tmp = re.findall(r'DRAGON_NAME_COMMENT_(\d+)".\n.*_Text = "(.*)"', data)
+    for i in tmp:
+        charaname[i[0]] = i[1].replace(' ','') \
+                .replace('（','(') \
+                .replace('）',')') \
+                .replace('Ver.','') \
+                .replace('限定','')
 
     tmp = re.findall(r'SKILL_NAME_(\d+)".\n.*_Text = "(.*)"', data)
     for i in tmp:
@@ -49,25 +59,25 @@ class Nilds(object):
 class Ds(object):
     global DPSRANGE
     dpsrange = DPSRANGE
-    def __init__(this, name=''):
-        global t0
+    def __init__(this, name, t1):
         this.name = name
         this.sum = 0
         this.cur = 0
         this.timedmg = [(0,0)]
-        this.t0 = t0
+        this.t1 = t1
         this.dt = 0
 
-    def add(this, timenow ,dmg):
+    def add(this, timenow ,dmg, name):
+        this.name = name
         this.sum += dmg
         this.cur += dmg
-        this.dt = timenow - this.t0
+        this.dt = timenow - this.t1
         this.timedmg.append((this.dt, dmg))
         #while this.timedmg[0][0] < this.dt-this.dpsrange:
         #    this.cur -= this.timedmg.pop(0)[1]
 
     def refresh(this, timenow):
-        dt = timenow - this.t0
+        dt = timenow - this.t1
         this.timedmg.append((dt, 0))
         while this.timedmg[0][0] < dt-this.dpsrange:
             this.cur -= this.timedmg.pop(0)[1]
@@ -83,25 +93,24 @@ class Ds(object):
         return '%d'%(this.sum)
 
     def dps_current(this):
-        #if this.dt <= this.dpsrange:
-        #    return '0'
         return '%d'%(this.cur/this.dpsrange)
-        #if(this.dt-this.timedmg[0][0]==0):
-        #    return this.cur / this.dpsrange
-        #return this.cur / (this.dt-this.timedmg[0][0])
 
 class Team(object):
-    def __init__(this):
+    def __init__(this, tn=None):
         global t0
         this.t0 = t0
+        if tn:
+            this.t1 = tn
+        else:
+            this.t1 = t0
         this.member = {}
         this.midx = []
 
     def add(this, timenow, idx, dmg, name=''):
         if idx not in this.member:
             this.midx.append(idx)
-            this.member[idx] = Ds(name)
-        this.member[idx].add(timenow, dmg)
+            this.member[idx] = Ds(name, timenow)
+        this.member[idx].add(timenow, dmg, name)
         for i in this.member.values():
             i.refresh(timenow)
         this.dt = timenow - this.t0
@@ -225,7 +234,7 @@ def on_message(message, data):
 
         #dp = line[5]+line[6]+line[7]+line[8]
         if teamdst not in teams:
-            teams[teamdst] = Team()
+            teams[teamdst] = Team(tn-1)
 
         t = teams[teamdst]
         t.add(tn, idx, dmg, cname)
@@ -233,7 +242,7 @@ def on_message(message, data):
         tmp = ', '
 
         tmp += ','
-        tmp += cname
+        tmp += cname+'->'
         if dstid in charaname:
             tmp += ' '+charaname[dstid]
         if skillid in skillname:
