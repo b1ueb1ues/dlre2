@@ -2,7 +2,10 @@ import struct
 import math
 
 def main():
-    b2f(0x00a2bc0f)
+    b2f(0x3f4ccccd)
+    b2f(0x3f99999A)
+    f2b(0.8)
+    f2b(1.2)
     exit()
     f2b(141.0)
     b2f(0x7f59985b40)
@@ -38,7 +41,9 @@ def f2b(a):
     a = struct.pack('f',a)
     b = struct.unpack('4s',a)
     b = b[0]
-    print("0x%02x%02x%02x%02x"%(ord(b[3]),ord(b[2]),ord(b[1]),ord(b[0])))
+    print('++++++++')
+    print(b)
+    print("0x%02x%02x%02x%02x"%(b[3],b[2],b[1],b[0]))
 
 def d2b(a):
     a = struct.pack('d',a)
@@ -54,8 +59,10 @@ def b2f(a):
     s[1] = chr(int(a[2:4],16))
     s[2] = chr(int(a[4:6],16))
     s[3] = chr(int(a[6:8],16))
+    print('---------')
     s = "%s%s%s%s"%(s[3],s[2],s[1],s[0])
-    a = struct.pack('4s',s.encode())
+    print(s.encode())
+    a = struct.pack('4s',s.encode('ascii'))
     b = struct.unpack('f',a)[0]
     print(b)
 

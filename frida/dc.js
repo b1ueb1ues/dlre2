@@ -1,53 +1,19 @@
 var ctx = {};
 
-//hook(
-//0x158CB00
-//,{
-//    onEnter: function(args){
-//        console.log('sponhit1: '+args[0]);
-//        console.log('sponhit2: '+args[1]);
-//        console.log('sponhit3: '+args[2]);
-//    }
-//});
 
-
-//hook( 
-//offset.damagecalculation.calculation
-//, {
-//    onEnter: function(args){
-//        this.tis = args[0];
-//        this.attr = args[1];
-//        this.dst = args[2];
-//        var coef = this.attr.add(
-//            offset.damagecalculation.coef
-//            ).readFloat();
-//        console.log('dmgcoef: '+coef);
-//    },
-//    onLeave: function(ret){
-//    }
-//});
-
+if(0){
 hook(
 offset.damagecalculation.calculationbasedamage
 ,{  //DamageCalculation$$CalculationBaseDamage
     onEnter: function(args){
     },
     onLeave: function(retval){
-        console.log('basedmg: '+p2f(retval));
+        console.log('basedmg: '+p2f(retval));  //use s register lead to 0 return
         //retval.replace(f2i(10000.0));
     }
 });
+}
 
-
-hook(
-0x017da774
-,{  //DamageCalculation$$CalculationBaseDamage
-    onEnter: function(args){
-    },
-    onLeave: function(retval){
-        console.log('gethitattrdc: '+p2f(retval));
-    }
-});
 
 if(1){
 hook(
@@ -61,7 +27,7 @@ offset.damagecalculation.calculation
         var coef = this.attr.add(
             offset.damagecalculation.coef
             ).readFloat();
-        console.log('dmgcoef: '+coef);
+        console.log('\ndmgcoef: '+coef);
 
     },
     onLeave: function(retval){
@@ -107,7 +73,7 @@ offset.characterbase.get_attack
             offset.characterbase.ret.get_attack_2_dc_cbd
         ).toString();
         if (bt[0].toString() == cb_ga) {
-            console.log('\nget_atk: '+retval.toInt32());
+            console.log('get_atk: '+retval.toInt32());
         }
     }
 });
@@ -161,14 +127,32 @@ offset.characterbase.getmaxsp // getmaxsp
 //    }
 //});
 
-//
-//hook(0x00b1be2c,{  // CollisionHitAttribute$$get_ToBreakDmgRate
-//    onEnter: function(args){
-//    },
-//    onLeave: function(ret){
-//            console.log('toOdRate: '+p2f(ret));
-//    }
-//});
+hook(
+0x017cb290
+,{  // CtrlOverdrive::OnDamaged
+    onEnter: function(args){
+        this.odhp = ptr(args[0]).add(0x2c)
+        console.log('ctrlOD_in: '+this.odhp.readFloat());
+    },
+    onLeave: function(ret){
+        if (this.context.x19 != 0){
+            console.log('ctrlOD_out: '+this.odhp.readFloat());
+        }
+    }
+});
+
+if(1){
+hook(
+0x01848030
+,{  // CollisionHitAttribute$$get_ToBreakDmgRate
+    onEnter: function(args){
+        bt(this);
+        console.log('tobkRate: '+args[0].add(0x100).readFloat());
+    },
+    onLeave: function(ret){
+    }
+});
+}
 
 
 //hook(0x00cfec0c,{  // get_chainnum
