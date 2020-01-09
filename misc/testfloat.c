@@ -40,9 +40,7 @@ int main(){
 int main(){
     int a = 0;
     //scanf("%d",&a);
-    //i2f(0x3f800000);
-    i2f(-221205376);
-    f2h(0.7);
+    i2f(0x3f800000);
     f2h(1.3);
     //scanf("%d",&a);
 }

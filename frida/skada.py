@@ -274,7 +274,7 @@ def on_message(message, data):
         if fout:
             fwrite(fout, p+'\n')
         else:
-            print(p)
+            print(p.encode('utf8'))
         #debug{
         if line[4] == '0' and dsttype=='1':
             sys.stderr.write(timing[1:]+teaminteamno+src+total+_sum+'\n')

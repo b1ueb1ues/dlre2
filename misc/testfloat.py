@@ -2,7 +2,9 @@ import struct
 import math
 
 def main():
-    b2f(0x00a2bc0f)
+    b2f(0x3f800000)
+    b2f(0x3f866666)
+    f2b(1.0)
     exit()
     f2b(141.0)
     b2f(0x7f59985b40)
@@ -36,42 +38,25 @@ def main():
 
 def f2b(a):
     a = struct.pack('f',a)
-    b = struct.unpack('4s',a)
-    b = b[0]
-    print("0x%02x%02x%02x%02x"%(ord(b[3]),ord(b[2]),ord(b[1]),ord(b[0])))
-
-def d2b(a):
-    a = struct.pack('d',a)
-    b = struct.unpack('8s',a)
-    b = b[0]
-    print( "%02x%02x%02x%02x%02x%02x%02x%02x"%(ord(b[7]),ord(b[6]),ord(b[5]),ord(b[4]),ord(b[3]),ord(b[2]),ord(b[1]),ord(b[0])) )
-
+    b = struct.unpack('I',a)[0]
+    print("0x%x"%(b));
+    #b = struct.unpack('4s',a)[0]
+    #print("0x%02x%02x%02x%02x"%(b[3],b[2],b[1],b[0]))
 
 def b2f(a):
-    a = "%08x"%a
-    s = [0,0,0,0]
-    s[0] = chr(int(a[0:2],16))
-    s[1] = chr(int(a[2:4],16))
-    s[2] = chr(int(a[4:6],16))
-    s[3] = chr(int(a[6:8],16))
-    s = "%s%s%s%s"%(s[3],s[2],s[1],s[0])
-    a = struct.pack('4s',s.encode())
+    a = struct.pack('I',a);
     b = struct.unpack('f',a)[0]
     print(b)
 
+
+def d2b(a):
+    a = struct.pack('d',a)
+    b = struct.unpack('Q',a)[0]
+    print("0x%x"%b)
+
+
 def b2d(a):
-    a = "%016x"%a
-    s = [0,0,0,0,0,0,0,0]
-    s[0] = chr(int(a[0:2],16))
-    s[1] = chr(int(a[2:4],16))
-    s[2] = chr(int(a[4:6],16))
-    s[3] = chr(int(a[6:8],16))
-    s[4] = chr(int(a[8:10],16))
-    s[5] = chr(int(a[10:12],16))
-    s[6] = chr(int(a[12:14],16))
-    s[7] = chr(int(a[14:16],16))
-    s = "%s%s%s%s%s%s%s%s"%(s[7],s[6],s[5],s[4],s[3],s[2],s[1],s[0])
-    a = struct.pack('8s',s)
+    a = struct.pack('Q',s)
     b = struct.unpack('d',a)[0]
     print(b)
 
