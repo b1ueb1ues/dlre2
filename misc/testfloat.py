@@ -2,9 +2,10 @@ import struct
 import math
 
 def main():
-    b2f(0x3f800000)
-    b2f(0x3f866666)
-    f2b(1.0)
+    b2f(0x3f4ccccd)
+    b2f(0x3f99999A)
+    f2b(0.8)
+    f2b(1.2)
     exit()
     f2b(141.0)
     b2f(0x7f59985b40)
