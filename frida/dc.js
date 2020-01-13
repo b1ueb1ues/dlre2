@@ -91,7 +91,7 @@ offset.characterbase.recoverysp
         //}
         //console.log(bt);
         console.log('** sp: '+args[1].toInt32());
-        //this.context.x1 = 20000;
+        this.context.x1 = 20000;
     },
     onLeave: function(retval){
     }
@@ -166,7 +166,7 @@ hook(
 //});
 
 
-if(0){  // control crit
+if(1){  // control crit
 hook(
 offset.random.randomrangeint
 ,{  //random$$range (int)
@@ -190,10 +190,10 @@ offset.random.randomrangeint
         } else if (caller == cbuf_ac){
             this.cbuf_ac = 1;
 
-        } else if (caller == pc_sas){
-            this.pc_sas = 1;
-        }
-        else{
+        //} else if (caller == pc_sas){
+        //    this.pc_sas = 1;
+        //
+        } else{
             //console.log('rrii else:'+ptr(bt[0]).add(0-ilbase));
         }
     },
@@ -282,7 +282,7 @@ if(0){
 }
 
 
-if(0){
+if(1){
     hook(
     offset.enemyctrl.setaiaction
     ,{

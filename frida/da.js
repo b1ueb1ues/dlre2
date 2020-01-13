@@ -84,6 +84,7 @@ var ctx = {};
 
 
 
+if(1){
 hook(
 offset.characterbase.recoverysp
 ,{
@@ -94,6 +95,7 @@ offset.characterbase.recoverysp
     onLeave: function(retval){
     }
 });
+}
 
 
 if(0){
