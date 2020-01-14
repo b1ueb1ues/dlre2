@@ -8,7 +8,7 @@ send(get_time(),tone);
  */
 var invincible = 0;
 var attack = 0;
-var dummy = 1;
+var dummy = 0;
 
 /**
  *  god like
@@ -155,7 +155,7 @@ offset.maingamectrl.playqueststart,
 //characterbase$$applyslipdamage
 hook(offset.characterbase.applyslipdamage, {
     onEnter: function(args){
-        console.log('cb::asd');
+        //console.log('cb::asd');
         var dst = args[0];
         //var src = args[1]; //attacker can be multiplayer
         var dmg = args[2];
