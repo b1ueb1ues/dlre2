@@ -61,7 +61,6 @@ function recount(type, dmg, iscrit, src, dst, actionid, skillid){
     var o_ci = offset.characterid;
     var dot = 0;
     var buff = 0;
-    console.log('========',type);
 
     if (type == 'cb::apsd') {
         dot = 1;
@@ -205,7 +204,6 @@ hook(
 offset.characterbufftriggerreactionbomb.execdebuffextradamage
 ,{
     onEnter: function(args) {
-        console.log('test');
         var tis = args[0];
         var p_br = args[1];
         var damage = p_br.add(
@@ -226,7 +224,6 @@ offset.characterbufftriggerreactionbomb.execdebuffextradamage
         ).readS32();
         
         recount('cbtrb::eded', damage, 0, src, dst, actionid, 0);
-        console.log(damage);
     },
     onLeave: function(ret){
     }
