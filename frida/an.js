@@ -65,9 +65,51 @@ hook(offset.characterbase.setabnormalstatus,{
 //ActionConditionElement$$get_Rate
 hook(offset.actionconditionelement.get_rate, {
     onEnter: function(args){
+        this.type = ptr(args[0]).add(0x14).readS32();
+        switch (this.type) {
+            case 0:
+                this.typestr = 'none';
+                break;
+            case 1:
+                this.typestr = 'poison';
+                break;
+            case 2:
+                this.typestr = 'burn';
+                break;
+            case 3:
+                this.typestr = 'freeze';
+                break;
+            case 4:
+                this.typestr = 'paralysis';
+                break;
+            case 5:
+                this.typestr = 'darkness';
+                break;
+            case 6:
+                this.typestr = 'stun';
+                break;
+            case 7:
+                this.typestr = 'curse';
+                break;
+            case 8:
+                this.typestr = 'rebirth';
+                break;
+            case 9:
+                this.typestr = 'slowmove';
+                break;
+            case 10:
+                this.typestr = 'sleep';
+                break;
+            case 99:
+                this.typestr = 'all';
+                break;
+            default:
+                this.typestr = 'null';
+        } 
     },
     onLeave: function(retval){
-        console.log('procrate'+retval);
+        console.log('procrate: '+r2i(retval));
+        console.log('proctype: '+this.typestr);
     }
 });
 
@@ -114,7 +156,7 @@ offset.characterbase.recoverysp
 
 
 
-if(1){
+if(0){
     hook(
     offset.enemyctrl.setaiaction
     ,{
