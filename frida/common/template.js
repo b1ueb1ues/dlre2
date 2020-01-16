@@ -21,6 +21,9 @@ offset.enemyctrl = {};
 offset.chainctrl = {};
 offset.characterdamageintermediate = {};
 offset.datetime = {}
+offset.characterbufftriggerreactionbomb = {};
+offset.actioncontainer = {};
+offset.buffrecord = {};
 
 offset.characterbase.characterid = @CharacterBase,<characterId>@;
 offset.characterbase.dungeonpartyindex = @CharacterBase,<dungeonPartyIndex>@;
@@ -58,6 +61,14 @@ offset.characterdamageintermediate.damageowner = @CharacterDamageIntermediate,da
 offset.characterdamageintermediate.attackhit = @CharacterDamageIntermediate,<attackHit>@;
 offset.characterdamageintermediate.collisionhitattribute = @CharacterDamageIntermediate,<hitAttr>@;
 
+offset.characterbufftriggerreactionbomb.container = @CharacterBuffTriggerReactionBomb,_container@;
+
+offset.actioncontainer.actionid = @ActionContainer,actionId@;
+
+offset.buffrecord.damage = @BuffRecord,Damage@;
+offset.buffrecord.dst = @BuffRecord,TargetChara@;
+offset.buffrecord.src = @BuffRecord,BuffAppender@;
+
 /**
  * functions table
  */
@@ -94,6 +105,8 @@ offset.enemyctrl.setaiaction = #EnemyCtrl$$SetAIAction#;
 offset.collisionhitattribute.get_damageadjustment = #CollisionHitAttribute$$get_DamageAdjustment#;
 
 offset.chainctrl.add = #ChainCtrl$$Add#;
+
+offset.characterbufftriggerreactionbomb.execdebuffextradamage = #CharacterBuffTriggerReactionBomb$$ExecDebuffExtraDamage#;
 
 /**
  * return address

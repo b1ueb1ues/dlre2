@@ -127,33 +127,33 @@ offset.characterbase.getmaxsp // getmaxsp
 //    }
 //});
 
-hook(
-0x017cb290
-,{  // CtrlOverdrive::OnDamaged
-    onEnter: function(args){
-        this.odhp = ptr(args[0]).add(0x2c)
-        console.log('ctrlOD_in: '+this.odhp.readFloat());
-    },
-    onLeave: function(ret){
-        if (this.context.x19 != 0){
-            console.log('ctrlOD_out: '+this.odhp.readFloat());
-        }
-    }
-});
-
-if(1){
-hook(
-0x01848030
-,{  // CollisionHitAttribute$$get_ToBreakDmgRate
-    onEnter: function(args){
-        bt(this);
-        console.log('tobkRate: '+args[0].add(0x100).readFloat());
-    },
-    onLeave: function(ret){
-    }
-});
-}
-
+//hook(
+//0x017cb290
+//,{  // CtrlOverdrive::OnDamaged
+//    onEnter: function(args){
+//        this.odhp = ptr(args[0]).add(0x2c)
+//        console.log('ctrlOD_in: '+this.odhp.readFloat());
+//    },
+//    onLeave: function(ret){
+//        if (this.context.x19 != 0){
+//            console.log('ctrlOD_out: '+this.odhp.readFloat());
+//        }
+//    }
+//});
+//
+//if(1){
+//hook(
+//0x01848030
+//,{  // CollisionHitAttribute$$get_ToBreakDmgRate
+//    onEnter: function(args){
+//        bt(this);
+//        console.log('tobkRate: '+args[0].add(0x100).readFloat());
+//    },
+//    onLeave: function(ret){
+//    }
+//});
+//}
+//
 
 //hook(0x00cfec0c,{  // get_chainnum
 //    onEnter: function(args){
@@ -194,20 +194,20 @@ offset.random.randomrangeint
         //    this.pc_sas = 1;
         //
         } else{
-            //console.log('rrii else:'+ptr(bt[0]).add(0-ilbase));
+            //console.log('r:rri else:'+ptr(bt[0]).add(0-ilbase));
         }
     },
     onLeave: function(ret){
         if (this.dc_cbd ) {
-            console.log('rrii dc_cbd: '+ret);
+            console.log('r:rri dc_cbd: '+ret);
             ret.replace(95);
         }
         if (this.cbuf_ac ) {
-            console.log('rrii cb_ac: '+ret);
+            console.log('r:rri cb_ac: '+ret);
             ret.replace(99);
         }
         //if (this.pc_sas ) {
-        //    console.log('rrii pc_sas: '+ret);
+        //    console.log('r:rri pc_sas: '+ret);
         //    ret.replace(95);
         //}
     }

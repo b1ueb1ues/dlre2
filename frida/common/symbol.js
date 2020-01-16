@@ -21,6 +21,9 @@ offset.enemyctrl = {};
 offset.chainctrl = {};
 offset.characterdamageintermediate = {};
 offset.datetime = {}
+offset.characterbufftriggerreactionbomb = {};
+offset.actioncontainer = {};
+offset.buffrecord = {};
 
 offset.characterbase.characterid = 0x11C;
 offset.characterbase.dungeonpartyindex = 0x124;
@@ -58,6 +61,14 @@ offset.characterdamageintermediate.damageowner = 0x20;
 offset.characterdamageintermediate.attackhit = 0x30;
 offset.characterdamageintermediate.collisionhitattribute = 0x38;
 
+offset.characterbufftriggerreactionbomb.container = 0x18;
+
+offset.actioncontainer.actionid = 0x60;
+
+offset.buffrecord.damage = 0x48;
+offset.buffrecord.dst = 0x50;
+offset.buffrecord.src = 0x58;
+
 /**
  * functions table
  */
@@ -94,6 +105,8 @@ offset.enemyctrl.setaiaction = 0x1F46B1C;
 offset.collisionhitattribute.get_damageadjustment = 0x1848008;
 
 offset.chainctrl.add = 0x163C254;
+
+offset.characterbufftriggerreactionbomb.execdebuffextradamage = 0x1F11974;
 
 /**
  * return address
