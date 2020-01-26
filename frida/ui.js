@@ -1,6 +1,7 @@
 var ctx = {};
 
 
+
 //hook(
 //0x1620ACC //showdamageui
 //,{
@@ -10,15 +11,28 @@ var ctx = {};
 //    }
 //});
 
+//var pf = ilbase.add(0x1620acc);
+//var old = new NativeFunction(pf, 'void', ['pointer','int','int','int','int','int']);
+//Interceptor.replace(ilbase.add(0x1620acc), new NativeCallback(function (arg0) {
+//        for (var i in this.context) {
+//            console.log(i, ':', this.context[i])
+//        }
+//    old(this.context.x0, this.context.x1, this.context.x2, this.context.x3, this.context.x4, this.context.x5);
+//    return;
+//}, 'void', ['pointer']));
+
 hook(
-//0x17E39CC //setup
+0x17E39CC //setup
 //0x1620ACC //showdamageui
-0x017e5314 //setupalpha
+//0x166254C  //cb showdamageui
+//0x017e5314 //setupalpha
 ,{
     onEnter: function (args) {
         for (var i in this.context) {
             console.log(i, ':', this.context[i])
         }
+        this.context.x3 = 0;
+        this.context.x5 = 2;
     }
 });
 
@@ -63,3 +77,4 @@ if(1){
         }
     });
 }
+

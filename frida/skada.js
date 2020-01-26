@@ -1,3 +1,15 @@
+hook(
+//0x17E39CC //setup
+0x1620ACC //showdamageui
+//0x166254C  //cb showdamageui
+//0x017e5314 //setupalpha
+,{
+    onEnter: function (args) {
+        this.context.x3 = 0;
+        this.context.x5 = 2;
+    }
+});
+
 /**
  * send t0 first
  */

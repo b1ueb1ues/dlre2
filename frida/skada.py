@@ -227,10 +227,12 @@ def on_message(message, data):
         inteamno = line[7]+line[6]
         if line[7] == '-2':
             idx = -2
+        elif line[7] == '-1':
+            idx = int(line[6])
         else:
             idx = int(inteamno)
-            if idx < -9:
-                idx = -10 - idx
+        #    if idx < -9:
+        #        idx = -10 - idx
 
         #dp = line[5]+line[6]+line[7]+line[8]
         if teamdst not in teams:
