@@ -3,7 +3,10 @@ import math
 
 def main():
     b2f(0x7fffffff)
+    b2f(0x3f000000)
+    b2f(0x72000002)
     b2f(0x80000000)
+    f2b(0.0)
     exit()
     f2b(141.0)
     b2f(0x7f59985b40)
