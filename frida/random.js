@@ -45,13 +45,13 @@ offset.random.randomrangeint
     },
     onLeave: function(ret){
         if (this.dc_cbd ) {
-            var replace = 1;
-            console.log('rrii dc_cbd: '+r2i(ret)+'->'+replace);
+            var replace = 65;
+            console.log('rrri dc_cbd: '+r2i(ret)+'->'+replace);
             ret.replace(replace);
         }
         if (this.cbuf_ac ) {
             var replace = 35;
-            console.log('rrii cb_ac: '+r2i(ret)+'->'+replace);
+            console.log('rrri cb_ac: '+r2i(ret)+'->'+replace);
             ret.replace(replace);
         }
     }

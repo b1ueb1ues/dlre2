@@ -21,7 +21,7 @@ def SetMethod(addr, name):
 path = getSourceFile()
 name = getScriptName()
 path = str(path)[:-len(name)]
-for i in open(path+'../script.py'):
+for i in open(path+'../../working/script.py'):
     if i[:10] != 'SetMethod(':
         continue
     end = i.find("')")

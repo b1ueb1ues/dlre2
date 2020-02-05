@@ -24,6 +24,7 @@ offset.datetime = {}
 offset.characterbufftriggerreactionbomb = {};
 offset.actioncontainer = {};
 offset.buffrecord = {};
+offset.ingameuictrl = {};
 
 offset.characterbase.characterid = 0x11C;
 offset.characterbase.dungeonpartyindex = 0x124;
@@ -34,7 +35,7 @@ offset.characterbase.characterparameter = 0x148;
 
 offset.characterparameter.fptotal = 0x88;
 
-offset.fluctuationparameter.abnormalresist = 0x60;
+offset.fluctuationparameter.abnormalresist = 0x68;
 
 offset.characterid.actorid = 0x10;
 offset.characterid.index = 0x11;
@@ -73,56 +74,57 @@ offset.buffrecord.src = 0x58;
  * functions table
  */
 
-offset.datetime.get_utcnow = 0x2E0F01C;
+offset.datetime.get_utcnow = 0x2EB8830;
 
-offset.damagecalculation.calculation = 0x17D8AF8;
-offset.damagecalculation.calculationbasedamage = 0x17D982C;
+offset.damagecalculation.calculation = 0x18984F4;
+offset.damagecalculation.calculationbasedamage = 0x1899260;
 
-offset.characterbase.get_maxhp = 0x164D718;
-offset.characterbase.get_attack = 0x164D8C0;
-offset.characterbase.get_defense = 0x164D954;
-offset.characterbase.get_defcoef = 0x164D9C4;
-offset.characterbase.recoverysp = 0x166C76C;  // (int value) the first one
-offset.characterbase.isinvincibleonhitcheck = 0x1651B60;
-offset.characterbase.applydamage = 0x16649E8;
-offset.characterbase.applyslipdamage = 0x16654C4;
-offset.characterbase.setabnormalstatus = 0x16685B4;
-offset.characterbase.getmaxsp = 0x166AEA0;
+offset.characterbase.get_maxhp = 0x1B8923C;
+offset.characterbase.get_attack = 0x1B893E4;
+offset.characterbase.get_defense = 0x1B89478;
+offset.characterbase.get_defcoef = 0x1B894E8;
+offset.characterbase.recoverysp = 0x1BA96A0;  // (int value) the first one
+offset.characterbase.isinvincibleonhitcheck = 0x1B8DCDC;
+offset.characterbase.applydamage = 0x1BA122C;
+offset.characterbase.applyslipdamage = 0x1BA1D14;
+offset.characterbase.setabnormalstatus = 0x1BA4F40;
+offset.characterbase.getmaxsp = 0x1BA7A18;
 
-offset.enemycharacter.ondamaged = 0x192FEE8;
+offset.enemycharacter.ondamaged = 0x16C64C4;
 
-offset.maingameleavealonechecker.setleavealonetime = 0x1872D98;
+offset.maingameleavealonechecker.setleavealonetime = 0x18F3F6C;
 
-offset.maingamectrl.playqueststart = 0x16B1CF8;
+offset.maingamectrl.playqueststart = 0x169BA1C;
 
-offset.actionconditionelement.get_rate = 0x187AA4C;
+offset.actionconditionelement.get_rate = 0x18FD874;
 
-offset.random.rangefloat = 0x3320778;   // first range()
-//offset.random.rangeint = 0x33207E8;   // second range()
-offset.random.randomrangeint = 0x33207EC; 
-offset.enemyctrl.setaiaction = 0x1F46B1C;
+offset.random.rangefloat = 0x339B148;   // first range()
+//offset.random.rangeint = 0x339B1B8;   // second range()
+offset.random.randomrangeint = 0x339B1BC; 
+offset.enemyctrl.setaiaction = 0x203ED8C;
 
-offset.collisionhitattribute.get_damageadjustment = 0x1848008;
+offset.collisionhitattribute.get_damageadjustment = 0x187C388;
 
-offset.chainctrl.add = 0x163C254;
+offset.chainctrl.add = 0x1AD1034;
 
-offset.characterbufftriggerreactionbomb.execdebuffextradamage = 0x1F11974;
+offset.characterbufftriggerreactionbomb.execdebuffextradamage = 0x2190444;
 
+offset.ingameuictrl.showdamageui = 0x18B13E8;
 /**
  * return address
  */
 offset.characterbase.ret = {};
-offset.characterbase.ret.get_attack_2_dc_cbd = 0x017d9f94;  // to calculationbasedamage
+offset.characterbase.ret.get_attack_2_dc_cbd = 0x018999d8;  // to calculationbasedamage
 offset.random.ret = {};
-offset.random.ret.rangefloat_2_dc_calculation = 0x017d8e48;  
-offset.random.ret.rangeint_2_dc_cbd = 0x017da1c4;
-offset.random.ret.rangeint_2_cb_ac = 0x02377914;  // characterbuff$$applycommon
+offset.random.ret.rangeint_2_dc_cbd = 0x01899c08;
+offset.random.ret.rangefloat_2_dc_calculation = 0x01898848;  
+offset.random.ret.rangeint_2_cb_ac = 0x023f9df0;  // characterbuff$$applycommon
 
 /**
  * manual get
  */
 offset.damagecalculation.coef = 0xf4;  //get from collisionHitAttr$$get_DamageAdjustment
-offset.collisionhitattribute.owner = 0x30;  //get
-offset.collisionhitattribute.charactertype = 0x9c;  //get
 offset.collisionhitattribute.actionid = 0xa4;  //get
+offset.collisionhitattribute.charactertype = 0x9c;  //get
+offset.collisionhitattribute.owner = 0x30;  //get
 offset.collisionhitattribute.skillid = 0xa8;  //get

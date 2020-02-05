@@ -8,7 +8,7 @@
 path = getSourceFile()
 name = getScriptName()
 path = str(path)[:-len(name)]
-fw = open(path+'../global-metadata.dat','wb')
+fw = open(path+'../../working/global-metadata.dat','wb')
 
 listing = currentProgram.getListing()
 st = currentProgram.getSymbolTable()
