@@ -31,6 +31,7 @@ def get_symbol():
                 .replace('）',')') \
                 .replace('Ver.','') \
                 .replace('限定','')
+                .replace(' ','')
     tmp = re.findall(r'DRAGON_NAME_(\d+)".\n.*_Text = "(.*)"', data)
     for i in tmp:
         charaname[i[0]] = i[1]
@@ -41,6 +42,7 @@ def get_symbol():
                 .replace('）',')') \
                 .replace('Ver.','') \
                 .replace('限定','')
+                .replace(' ','')
 
     tmp = re.findall(r'SKILL_NAME_(\d+)".\n.*_Text = "(.*)"', data)
     for i in tmp:

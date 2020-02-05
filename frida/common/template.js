@@ -114,16 +114,16 @@ offset.ingameuictrl.showdamageui = #InGameUICtrl$$ShowDamageUI#;
  * return address
  */
 offset.characterbase.ret = {};
-offset.characterbase.ret.get_attack_2_dc_cbd = 0x018999d8;  // to calculationbasedamage
+offset.characterbase.ret.get_attack_2_dc_cbd = 0x0189ea08;  // to calculationbasedamage
 offset.random.ret = {};
-offset.random.ret.rangeint_2_dc_cbd = 0x01899c08;
-offset.random.ret.rangefloat_2_dc_calculation = 0x01898848;  
-offset.random.ret.rangeint_2_cb_ac = 0x023f9df0;  // characterbuff$$applycommon
+offset.random.ret.rangeint_2_dc_cbd = 0x0189e918;
+offset.random.ret.rangefloat_2_dc_calculation = 0x0189d878;  
+offset.random.ret.rangeint_2_cb_ac = 0x024015f4;  // characterbuff$$applycommon
 
 /**
  * manual get
  */
-offset.damagecalculation.coef = 0xf4;  //get from collisionHitAttr$$get_DamageAdjustment
+offset.damagecalculation.coef = 0xf4;  //get from collisionHitAttribute$$get_DamageAdjustment
 offset.collisionhitattribute.actionid = 0xa4;  //get
 offset.collisionhitattribute.charactertype = 0x9c;  //get
 offset.collisionhitattribute.owner = 0x30;  //get
