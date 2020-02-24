@@ -3,7 +3,7 @@ var ctx = {};
 
 var invincible = 1;
 var attack = 0;
-var attack = 6000;
+var attack = 10000;
 
 
 

@@ -37,6 +37,7 @@ offset.damagecalculation.calculation
         var o_dc = offset.damagecalculation;
         var o_cha = offset.collisionhitattribute;
 
+
         var p_ds = follow(this.tis, o_dc.normal); //damagestatues normal
 
         var dmg = p_ds.add(o_ds.value);
@@ -45,11 +46,17 @@ offset.damagecalculation.calculation
         //ct = cb.add(0xb8).readInt(); //charactertype
         var ct = this.attr.add(o_cha.charactertype).readInt();
 
+
         var damage = dmg.readInt() ; //value
         var iscrit = p_ds.add(o_ds.iscrit).readU8()
         var cha = this.attr // collisionhitattribute
         if(ct==0){
             console.log('dmg: '+damage);
+        } 
+        else if (1) {
+            dmg.writeInt(0);
+            //var _id = this.attr.add(0xb8).readPointer();
+            //console.log(hexdump(_id));
         }
     }
 });
@@ -282,7 +289,7 @@ if(0){
 }
 
 
-if(1){
+if(0){
     hook(
     offset.enemyctrl.setaiaction
     ,{

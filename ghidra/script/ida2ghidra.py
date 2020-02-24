@@ -28,5 +28,5 @@ for i in open(path+'../../working/script.py'):
     i = i[10:end]
     an = i.strip().split(', \'')
     addr = int(an[0],16)
-    name = an[1].strip()
+    name = an[1].strip().replace('$$', '::');
     SetMethod(addr, name)
