@@ -71,6 +71,7 @@ function recount(type, dmg, iscrit, src, dst, actionid, skillid){
     var o_cb = offset.characterbase;
     var o_cha = offset.collisionhitattribute;
     var o_ci = offset.characterid;
+    var o_dragon = offset.dragoncharacter
     var dot = 0;
     var buff = 0;
 
@@ -88,6 +89,13 @@ function recount(type, dmg, iscrit, src, dst, actionid, skillid){
     var dpi =    cb.add(  o_cb.dungeonpartyindex       ).readInt(); 
     var dpp =    cb.add(  o_cb.dungeonpartyposition    ).readInt(); 
     var p_mpid = cb.add(  o_cb.multiplayid             ).readPointer(); 
+
+    var isd = ''+ci;
+    if (isd[0] == '2'){  //dragon
+        cb = cb.add( o_dragon.human).readPointer();
+        ci = cb.add( o_cb.characterid).readInt();
+        ci = ''+ci+'('+isd+')'
+    }
     
     if (p_mpid != 0){
         var aid = p_mpid.add( o_ci.actorid  ).readU8(); 

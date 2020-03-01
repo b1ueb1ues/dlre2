@@ -3,6 +3,7 @@
  */
 var offset = {};
 offset.characterbase = {};
+offset.dragoncharacter = {};
 offset.characterparameter = {};
 offset.fluctuationparameter = {};
 offset.characterid = {};
@@ -32,6 +33,9 @@ offset.characterbase.dungeonpartyposition = @CharacterBase,<dungeonPartyPosition
 offset.characterbase.multiplayid = @CharacterBase,<multiPlayId>@;
 offset.characterbase.charactertype = @CharacterBase,<type>@;
 offset.characterbase.characterparameter = @CharacterBase,<param>@;
+offset.characterbase.isdragon = @CharacterBase,<isUsedTransformDragon>@;
+
+offset.dragoncharacter.human = @DragonCharacter,human@;
 
 offset.characterparameter.fptotal = @CharacterParameter,total@;
 

@@ -3,6 +3,7 @@
  */
 var offset = {};
 offset.characterbase = {};
+offset.dragoncharacter = {};
 offset.characterparameter = {};
 offset.fluctuationparameter = {};
 offset.characterid = {};
@@ -32,6 +33,9 @@ offset.characterbase.dungeonpartyposition = 0x128;
 offset.characterbase.multiplayid = 0x130;
 offset.characterbase.charactertype = 0x13C;
 offset.characterbase.characterparameter = 0x148;
+offset.characterbase.isdragon = 0x4D0;
+
+offset.dragoncharacter.human = 0x620;
 
 offset.characterparameter.fptotal = 0x88;
 

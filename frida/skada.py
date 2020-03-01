@@ -209,7 +209,7 @@ def on_message(message, data):
         p = message['payload']
         line = p.split(',')
         tn = int(line[0])/10000/1000
-        srcid = line[2].strip()
+        srcid = line[2].split('(')[0].strip()
         if srcid in charaname:
             cname = charaname[srcid]
         else:
@@ -290,6 +290,8 @@ if __name__ == '__main__':
     import os
     if len(sys.argv) > 1:
         fpname = sys.argv[1]
+        if '/' not in fpname :
+            fpname = 'recount/'+fpname
     else:
         fpname = None
 
