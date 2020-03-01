@@ -91,7 +91,7 @@ function recount(type, dmg, iscrit, src, dst, actionid, skillid){
     var p_mpid = cb.add(  o_cb.multiplayid             ).readPointer(); 
 
     var isd = ''+ci;
-    if (isd[0] == '2'){  //dragon
+    if (ct==0 && isd[0] == '2'){  //dragon
         cb = cb.add( o_dragon.human).readPointer();
         ci = cb.add( o_cb.characterid).readInt();
         ci = ''+ci+'('+isd+')'
