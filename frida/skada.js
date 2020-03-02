@@ -1,12 +1,10 @@
 hook(
-//0x17E39CC //setup
 offset.ingameuictrl.showdamageui
-//0x166254C  //cb showdamageui
-//0x017e5314 //setupalpha
 ,{
     onEnter: function (args) {
-        this.context.x3 = 0; //crit
-        this.context.x5 = 2;  //ele
+        //this.context.x3 = 0; //crit
+        //this.context.x5 = 2;  //ele
+        this.context.sp.writeInt(0); // isplayerctrl
     }
 });
 
