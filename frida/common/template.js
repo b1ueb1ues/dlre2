@@ -118,11 +118,11 @@ offset.ingameuictrl.showdamageui = #InGameUICtrl$$ShowDamageUI#;
  * return address
  */
 offset.characterbase.ret = {};
-offset.characterbase.ret.get_attack_2_dc_cbd = 0x01806f40;  // to calculationbasedamage
+offset.characterbase.ret.get_attack_2_dc_cbd = 0x0180d0f0;  // to calculationbasedamage
 offset.random.ret = {};
-offset.random.ret.rangeint_2_dc_cbd = 0x018071c0;
-offset.random.ret.rangefloat_2_dc_calculation = 0x01805da8;  
-offset.random.ret.rangeint_2_cb_ac = 0x023bcfb4;  // characterbuff$$applycommon
+offset.random.ret.rangeint_2_dc_cbd = 0x0180d370;   // calculationbasedamage
+offset.random.ret.rangefloat_2_dc_calculation = 0x0180bf0c;   // calculation
+offset.random.ret.rangeint_2_cb_ac = 0x0235cea0;  // characterbuff$$applycommon
 
 /**
  * manual get

@@ -172,7 +172,7 @@ offset.characterbase.getmaxsp // getmaxsp
 //});
 
 //hook(
-//0x017cb290
+//0x017f8710
 //,{  // CtrlOverdrive::OnDamaged
 //    onEnter: function(args){
 //        this.odhp = ptr(args[0]).add(0x2c)
@@ -326,7 +326,7 @@ if(0){
 }
 
 
-if(0){
+if(1){
     hook(
     offset.enemyctrl.setaiaction
     ,{
