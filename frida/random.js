@@ -79,6 +79,8 @@ offset.random.rangefloat
             console.log('replace randomfloat');
         }else{
             //console.log('rrf else:'+ptr(bt[0]).add(0-ilbase));
+            //p1.writeInt(0x3f800000);
+            //p2.writeInt(0x3f800000);
         }
     },
     onLeave: function(ret){

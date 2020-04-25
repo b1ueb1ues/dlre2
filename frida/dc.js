@@ -290,6 +290,10 @@ offset.random.rangefloat
         }
         else{
             //console.log('rrf else:'+ptr(bt[0]).add(0-ilbase));
+            //var p1 = ptr(this.context.sp-128-16);
+            //var p2 = ptr(this.context.sp-128);
+            //p1.writeInt(0x3f800000);
+            //p2.writeInt(0x3f800000);
         }
     },
     onLeave: function(ret){
