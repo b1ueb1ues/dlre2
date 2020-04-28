@@ -1,6 +1,6 @@
 #Set unity meta-data from idascript
 #@b1ueb1ues 
-#@category _NEW_
+#@category _dl
 #@keybinding 
 #@menupath 
 #@toolbar 

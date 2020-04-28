@@ -1,6 +1,6 @@
 # dump cone to global-metadata
 #@b1ueb1ues 
-#@category _NEW_
+#@category _dl
 #@keybinding 
 #@menupath 
 #@toolbar 
