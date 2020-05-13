@@ -1,25 +1,25 @@
 var ctx = {};
 
-//hook(
-//offset.characterbase.get_maxhp
-//,{
-//    onEnter: function(args){
-//    },
-//    onLeave: function(retval){
-//        console.log('get_maxhp: '+retval.toInt32());
-//    }
-//});
-
 hook(
-0x131C374
+offset.characterbase.get_maxhp
 ,{
     onEnter: function(args){
-        console.log('get_currShp');
     },
     onLeave: function(retval){
-        console.log('calc_sheild '+retval.toInt32());
+        console.log('get_maxhp: '+retval.toInt32());
     }
-})
+});
+
+//hook(
+//0x131C374
+//,{
+//    onEnter: function(args){
+//        console.log('get_currShp');
+//    },
+//    onLeave: function(retval){
+//        console.log('calc_sheild '+retval.toInt32());
+//    }
+//})
 
 /*
  * 

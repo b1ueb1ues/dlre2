@@ -78,51 +78,51 @@ offset.buffrecord.src = 0x58;
  * functions table
  */
 
-offset.datetime.get_utcnow = 0x2FEFD18;
+offset.datetime.get_utcnow = 0x2FF3870;
 
-offset.damagecalculation.calculation = 0x18C9444;
-offset.damagecalculation.calculationbasedamage = 0x18CA310;
+offset.damagecalculation.calculation = 0x18C7918;
+offset.damagecalculation.calculationbasedamage = 0x18C8924;
 
-offset.characterbase.get_maxhp = 0x17773AC;
-offset.characterbase.get_attack = 0x1777554;
-offset.characterbase.get_defense = 0x17775E8;
-offset.characterbase.get_defcoef = 0x1777658;
-offset.characterbase.recoverysp = 0x1799A34;  // (int value) the first one
-offset.characterbase.isinvincibleonhitcheck = 0x177BF24;
-offset.characterbase.applydamage = 0x1790C20;
-offset.characterbase.applyslipdamage = 0x1791748;
-offset.characterbase.setabnormalstatus = 0x1794DA8;
-offset.characterbase.getmaxsp = 0x1797A14;
+offset.characterbase.get_maxhp = 0x1777610;
+offset.characterbase.get_attack = 0x17777B8;
+offset.characterbase.get_defense = 0x177784C;
+offset.characterbase.get_defcoef = 0x17778BC;
+offset.characterbase.recoverysp = 0x1799C98;  // (int value) the first one
+offset.characterbase.isinvincibleonhitcheck = 0x177C188;
+offset.characterbase.applydamage = 0x1790E84;
+offset.characterbase.applyslipdamage = 0x17919AC;
+offset.characterbase.setabnormalstatus = 0x179500C;
+offset.characterbase.getmaxsp = 0x1797C78;
 
-offset.enemycharacter.ondamaged = 0x1EE5BFC;
+offset.enemycharacter.ondamaged = 0x1EE45EC;
 
-offset.maingameleavealonechecker.setleavealonetime = 0x193E470;
+offset.maingameleavealonechecker.setleavealonetime = 0x193CBA0;
 
-offset.maingamectrl.playqueststart = 0x170999C;
+offset.maingamectrl.playqueststart = 0x1709C00;
 
-offset.actionconditionelement.get_rate = 0x194E078;
+offset.actionconditionelement.get_rate = 0x194C7A8;
 
-offset.random.rangefloat = 0x3463EFC;   // first range()
-//offset.random.rangeint = 0x3463F6C;   // second range()
-offset.random.randomrangeint = 0x3463F70; 
-offset.enemyctrl.setaiaction = 0x1EF223C;
+offset.random.rangefloat = 0x3469A54;   // first range()
+//offset.random.rangeint = 0x3469AC4;   // second range()
+offset.random.randomrangeint = 0x3469AC8; 
+offset.enemyctrl.setaiaction = 0x1EF0C2C;
 
-offset.collisionhitattribute.get_damageadjustment = 0x1BD59CC;
+offset.collisionhitattribute.get_damageadjustment = 0x1BD41CC;
 
-offset.chainctrl.add = 0x1D19854;
+offset.chainctrl.add = 0x1D1B054;
 
-offset.characterbufftriggerreactionbomb.execdebuffextradamage = 0x22A3380;
+offset.characterbufftriggerreactionbomb.execdebuffextradamage = 0x22A2DA0;
 
-offset.ingameuictrl.showdamageui = 0x17D5B2C;
+offset.ingameuictrl.showdamageui = 0x17D5DF8;
 /**
  * return address
  */
 offset.characterbase.ret = {};
-offset.characterbase.ret.get_attack_2_dc_cbd = 0x018cab14;  // to calculationbasedamage
+offset.characterbase.ret.get_attack_2_dc_cbd = 0x018c9128;  // to calculationbasedamage
 offset.random.ret = {};
-offset.random.ret.rangeint_2_dc_cbd = 0x018cada8;   // calculationbasedamage
-offset.random.ret.rangefloat_2_dc_calculation = 0x018c97a0;   // calculation
-offset.random.ret.rangeint_2_cb_ac = 0x0237f73c;  // characterbuff$$applycommon
+offset.random.ret.rangeint_2_dc_cbd = 0x018c93bc;   // calculationbasedamage
+offset.random.ret.rangefloat_2_dc_calculation = 0x018c7c74;   // calculation
+offset.random.ret.rangeint_2_cb_ac = 0x0235fd94;  // characterbuff$$applycommon
 
 /**
  * manual get

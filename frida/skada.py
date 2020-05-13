@@ -213,7 +213,7 @@ def on_message(message, data):
         if srcid in charaname:
             cname = charaname[srcid]
         else:
-            cname = ''
+            cname = '_unknown_'
         if srcid == '-1':
             cname = 'dot'
 
