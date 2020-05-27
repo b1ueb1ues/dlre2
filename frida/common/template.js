@@ -114,15 +114,18 @@ offset.chainctrl.add = #ChainCtrl$$Add#;
 offset.characterbufftriggerreactionbomb.execdebuffextradamage = #CharacterBuffTriggerReactionBomb$$ExecDebuffExtraDamage#;
 
 offset.ingameuictrl.showdamageui = #InGameUICtrl$$ShowDamageUI#;
+
+offset.maingameskillfadeoutctrl.fadeout = #MainGameSkillFadeoutCtrl$$FadeOut#;
+
 /**
  * return address
  */
 offset.characterbase.ret = {};
-offset.characterbase.ret.get_attack_2_dc_cbd = 0x018c9128;  // to calculationbasedamage
+offset.characterbase.ret.get_attack_2_dc_cbd = 0x0182e080;  // to calculationbasedamage
 offset.random.ret = {};
-offset.random.ret.rangeint_2_dc_cbd = 0x018c93bc;   // calculationbasedamage
-offset.random.ret.rangefloat_2_dc_calculation = 0x018c7c74;   // calculation
-offset.random.ret.rangeint_2_cb_ac = 0x0235fd94;  // characterbuff$$applycommon
+offset.random.ret.rangeint_2_dc_cbd = 0x0182e334;   // calculationbasedamage
+offset.random.ret.rangefloat_2_dc_calculation = 0x0182c864;   // calculation
+offset.random.ret.rangeint_2_cb_ac = 0x0244d8d4;  // characterbuff$$applycommon
 
 /**
  * manual get
