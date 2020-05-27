@@ -1,3 +1,4 @@
+// save the day
 hook(
 offset.ingameuictrl.showdamageui
 ,{
@@ -7,6 +8,15 @@ offset.ingameuictrl.showdamageui
         this.context.sp.writeInt(0); // isplayerctrl
     }
 });
+
+// save the day
+var fade = ilbase.add(
+offset.maingameskillfadeoutctrl.fadeout
+);
+Interceptor.replace(fade, new NativeCallback(function (_this_) {
+}, 'void', ['pointer']));
+
+
 
 /**
  * send t0 first
@@ -56,6 +66,8 @@ function at2name(at){
         ab = 'slowmove'
     } else if(at==10){
         ab = 'sleep'
+    } else if(at==11){
+        ab = 'frost'
     } else if(at==99){
         ab = 'all'
     }
