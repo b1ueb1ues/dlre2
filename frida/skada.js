@@ -10,13 +10,14 @@ offset.ingameuictrl.showdamageui
 });
 
 // save the day
-var fade = ilbase.add(
-offset.maingameskillfadeoutctrl.fadeout
-);
-Interceptor.replace(fade, new NativeCallback(function (_this_) {
-}, 'void', ['pointer']));
-
-
+hook(
+offset.ingameuictrl.setmovein
+,{
+    onEnter: function (args) {
+        if (args[1] == 0)
+            this.context.x1 = 1;
+    }
+});
 
 /**
  * send t0 first
