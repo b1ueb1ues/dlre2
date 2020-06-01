@@ -114,8 +114,8 @@ offset.chainctrl.add = #ChainCtrl$$Add#;
 offset.characterbufftriggerreactionbomb.execdebuffextradamage = #CharacterBuffTriggerReactionBomb$$ExecDebuffExtraDamage#;
 
 offset.ingameuictrl.showdamageui = #InGameUICtrl$$ShowDamageUI#;
+offset.ingameuictrl.setmovein = #InGameUICtrl$$SetMoveIn#;
 
-offset.maingameskillfadeoutctrl.fadeout = #MainGameSkillFadeoutCtrl$$FadeOut#;
 
 /**
  * return address

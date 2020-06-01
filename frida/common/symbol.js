@@ -114,8 +114,8 @@ offset.chainctrl.add = 0x1D6EDA8;
 offset.characterbufftriggerreactionbomb.execdebuffextradamage = 0x2296918;
 
 offset.ingameuictrl.showdamageui = 0x17719EC;
+offset.ingameuictrl.setmovein = 0x178196C;
 
-offset.maingameskillfadeoutctrl.fadeout = 0x18D8DDC;
 
 /**
  * return address
