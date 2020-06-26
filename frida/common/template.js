@@ -121,11 +121,11 @@ offset.ingameuictrl.setmovein = #InGameUICtrl$$SetMoveIn#;
  * return address
  */
 offset.characterbase.ret = {};
-offset.characterbase.ret.get_attack_2_dc_cbd = 0x0182e080;  // to calculationbasedamage
+offset.characterbase.ret.get_attack_2_dc_cbd = 0x01848238;  // to calculationbasedamage
 offset.random.ret = {};
-offset.random.ret.rangeint_2_dc_cbd = 0x0182e334;   // calculationbasedamage
-offset.random.ret.rangefloat_2_dc_calculation = 0x0182c864;   // calculation
-offset.random.ret.rangeint_2_cb_ac = 0x0244d8d4;  // characterbuff$$applycommon
+offset.random.ret.rangeint_2_dc_cbd = 0x018484f0;   // calculationbasedamage
+offset.random.ret.rangefloat_2_dc_calculation = 0x01846a0c;   // calculation
+offset.random.ret.rangeint_2_cb_ac = 0x023c1ab8;  // characterbuff$$applycommon
 
 /**
  * manual get
