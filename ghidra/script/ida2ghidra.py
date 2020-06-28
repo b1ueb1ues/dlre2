@@ -14,7 +14,7 @@ def SetMethod(addr, name):
     if func:
         func.setName(name,ghidra.program.model.symbol.SourceType.USER_DEFINED)
     else:
-        print 'create func at ',addr, '(%s)'%name
+        #print 'create func at ',addr, '(%s)'%name
         createFunction(addr,name)
 
 
