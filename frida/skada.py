@@ -130,7 +130,7 @@ class Team(object):
         return ret
 
     def timing(this):
-        return ',t:{,%.2f,}'%(this.dt)
+        return ',t:{,%.3f,}'%(this.dt)
 
     def dmg_sum(this):
         ret = ',dmg_sum:{'
