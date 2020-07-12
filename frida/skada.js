@@ -78,17 +78,12 @@ function at2name(at){
 
 
 //send('self/team,[,ctype,::,cid,didx,dposition,multiplay_id,multiplay_index,],<actionid>,<skillid>,iscrit,dmg');
-function recount(type, dmg, iscrit, src, dst, actionid, skillid){
+function recount(type, dot, dmg, iscrit, src, dst, actionid, skillid){
     var o_cb = offset.characterbase;
     var o_cha = offset.collisionhitattribute;
     var o_ci = offset.characterid;
     var o_dragon = offset.dragoncharacter
-    var dot = 0;
     var buff = 0;
-
-    if (type == 'cb::apsd') {
-        dot = 1;
-    }
 
     if(dot){
         skillid = at2name(actionid);
@@ -183,10 +178,10 @@ offset.maingamectrl.playqueststart,
 });
 
 
-//characterbase$$applyslipdamage
-hook(offset.characterbase.applyslipdamage, {
+hook(
+offset.characterbase.calcabnormalstatusdamage,
+{
     onEnter: function(args){
-        //console.log('cb::asd');
         var dst = args[0];
         //var src = args[1]; //attacker can be multiplayer
         var dmg = args[2];
@@ -194,12 +189,12 @@ hook(offset.characterbase.applyslipdamage, {
 
         var at = abt.toInt32();
         var damage = dmg.toInt32();
-        recount('cb::apsd', damage, 0, dst, dst, abt, 0); 
-    },
-    onLeave: function(retval){
-        retval.replace(attack);
+        console.log(at);
+
+        recount('cb::casd',1, damage, 0, dst, dst, abt, 0); 
     }
 });
+
 
 //CharacterBase$$ApplyDamage
 hook(offset.characterbase.applydamage, {
@@ -224,7 +219,7 @@ hook(offset.characterbase.applydamage, {
         var actionid = cha.add( o_cha.actionid  ).readInt();
         var skillid =  cha.add( o_cha.skillid   ).readInt();
         var src = follow(cha,  o_cha.owner );  
-        recount('cb::admg',damage,iscrit,src,tis, actionid, skillid);
+        recount('cb::admg', 0, damage,iscrit,src,tis, actionid, skillid);
     },
     onLeave: function(retval){
     }

@@ -91,6 +91,8 @@ offset.characterbase.recoverysp = 0x18CC7E8;  // (int value) the first one
 offset.characterbase.isinvincibleonhitcheck = 0x18ACFA4;
 offset.characterbase.applydamage = 0x18C3268;
 offset.characterbase.applyslipdamage = 0x18C3FD8;
+offset.characterbase.calcabnormalstatusdamage = 0x18C3DF0;
+
 offset.characterbase.setabnormalstatus = 0x18C79F8;
 offset.characterbase.getmaxsp = 0x18CA5D0;
 

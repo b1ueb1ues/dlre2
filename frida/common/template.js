@@ -91,6 +91,8 @@ offset.characterbase.recoverysp = #CharacterBase$$RecoverySp,1#;  // (int value)
 offset.characterbase.isinvincibleonhitcheck = #CharacterBase$$IsInvincibleOnHitCheck#;
 offset.characterbase.applydamage = #CharacterBase$$ApplyDamage#;
 offset.characterbase.applyslipdamage = #CharacterBase$$ApplySlipDamage#;
+offset.characterbase.calcabnormalstatusdamage = #CharacterBase$$CalcAbnormalStatusDamage#;
+
 offset.characterbase.setabnormalstatus = #CharacterBase$$SetAbnormalStatus#;
 offset.characterbase.getmaxsp = #CharacterBase$$GetMaxSp#;
 
