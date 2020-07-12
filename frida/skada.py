@@ -281,7 +281,7 @@ def on_message(message, data):
             print(p.encode('utf8'))
         #debug{
         if line[4] == '0' and dsttype=='1':
-            sys.stderr.write(timing[1:]+teaminteamno+src+total+_sum+'\n')
+            sys.stderr.write(timing[1:]+',dst:'+dstid+teaminteamno+src+total+_sum+'\n')
         #}debug
     else:
         print(message)
