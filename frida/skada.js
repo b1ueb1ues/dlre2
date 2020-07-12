@@ -185,11 +185,10 @@ offset.characterbase.calcabnormalstatusdamage,
         var dst = args[0];
         //var src = args[1]; //attacker can be multiplayer
         var dmg = args[2];
-        var abt = args[3];
+        var abt = args[4];
 
         var at = abt.toInt32();
         var damage = dmg.toInt32();
-        console.log(at);
 
         recount('cb::casd',1, damage, 0, dst, dst, abt, 0); 
     }

@@ -199,7 +199,7 @@ def summ():
             total = t.dps_total()
             _sum = t.dmg_sum()
             src = t.dps_src()
-            teaminteamno = ',inteamno:{'
+            teaminteamno = ',idx:{'
             for k in t.midx:
                 teaminteamno += ' %02d'%(k)
             teaminteamno += '}'
