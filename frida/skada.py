@@ -189,7 +189,7 @@ def summ():
     if teams != {}:
         sys.stderr.write('\n[+] summary:\n')
         for i in teams:
-            tmp = i.split(':')[1]
+            dstid, tmp = i.split(':')
             dsttype = tmp[1]
             if dsttype != '1':
                 continue
@@ -203,7 +203,7 @@ def summ():
             for k in t.midx:
                 teaminteamno += ' %02d'%(k)
             teaminteamno += '}'
-            sys.stderr.write(i+','+timing[1:]+teaminteamno+src+total+_sum+'\n')
+            sys.stderr.write(dstid+','+timing[1:]+teaminteamno+src+total+_sum+'\n')
     teams = {}
 
 def on_message(message, data):
@@ -300,7 +300,7 @@ def on_message(message, data):
         if fout:
             fwrite(fout, p+'\n')
         else:
-            print(p)
+            print(p.encode('utf8'))
         #debug{
         if line[4] == '0' and dsttype=='1':
             #sys.stderr.write(timing[1:]+',dst:'+dstid+teaminteamno+src+total+_sum+'\n')
