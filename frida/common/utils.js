@@ -8,7 +8,7 @@ function follow(p,offset){
     return p
 }
 
-arrow = function(p, offset) {
+var arrow = function(p, offset) {
     return p.add(offset).readPointer();
 }
 arrow.p = function(p, offset) {
@@ -24,7 +24,7 @@ arrow.d = function(p, offset) {
     return p.add(offset).readDouble();
 }
 
-star = function(p) {
+var star = function(p) {
     return p.readPointer();
 }
 star.p = function(p) {
