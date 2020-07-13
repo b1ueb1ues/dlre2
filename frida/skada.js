@@ -167,7 +167,7 @@ offset.maingamectrl.playqueststart,
         s += ',-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-'
         send(s, tzero);
        // tis = args[0]
-       // igtime = follow(tis, 0x13c)
+       // igtime = arrow(tis, 0x13c)
        // sfdt = igtime.add(0x8).readFloat();
        // gsr = 1
        // gsr = igtime.add(0x24).readInt();
@@ -223,7 +223,7 @@ hook(offset.characterbase.applydamage, {
         var iscrit = attackhit.add(  o_ah.iscrit  ).readU8();
         var actionid = cha.add( o_cha.actionid  ).readInt();
         var skillid =  cha.add( o_cha.skillid   ).readInt();
-        var src = follow(cha,  o_cha.owner );  
+        var src = arrow(cha,  o_cha.owner );  
         recount('cb::admg',damage,iscrit,src,tis, actionid, skillid);
     },
     onLeave: function(retval){
@@ -277,11 +277,11 @@ offset.characterbufftriggerreactionbomb.execdebuffextradamage
 //        o_dc = offset.damagecalculation;
 //        o_cha = offset.collisionhitattribute;
 //
-//        p_ds = follow(this.tis, o_dc.normal); //damagestatues normal
+//        p_ds = arrow(this.tis, o_dc.normal); //damagestatues normal
 //
 //        dmg = p_ds.add(o_ds.value);
 //
-//        //cb = follow(this.attr,0x24); //characterbase owner
+//        //cb = arrow(this.attr,0x24); //characterbase owner
 //        //ct = cb.add(0xb8).readInt(); //charactertype
 //        ct = this.attr.add(o_cha.charactertype).readInt();
 //

@@ -55,6 +55,7 @@ def run(jsname, on_message=None):
     jscode = symboljs + commonjs + padding + jscode
 
     script = process.create_script(jscode)
+    #script = process.create_script(jscode, runtime='v8')
     script.on('message', on_message)
     sys.stderr.write('[*] Running %s\n==============================\n'%jsname)
     script.load()

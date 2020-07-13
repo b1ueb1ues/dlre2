@@ -7,23 +7,37 @@ function follow(p,offset){
     p = p.readPointer();
     return p
 }
-function arrow(p,offset){
-    p = p.add(offset);
-    p = p.readPointer();
-    return p
+
+arrow = function(p, offset) {
+    return p.add(offset).readPointer();
 }
-function arrowint(p,offset){
-    p = p.add(offset);
-    p = p.readInt();
-    return p
+arrow.p = function(p, offset) {
+    return p.add(offset).readPointer();
 }
-function arrowfloat(p,offset){
-    p = p.add(offset);
-    p = p.readFloat();
-    return p
+arrow.i = function(p, offset) {
+    return p.add(offset).readInt();
 }
-function star(p){
-    return p.readPointer()
+arrow.f = function(p, offset) {
+    return p.add(offset).readFloat();
+}
+arrow.d = function(p, offset) {
+    return p.add(offset).readDouble();
+}
+
+star = function(p) {
+    return p.readPointer();
+}
+star.p = function(p) {
+    return p.readPointer();
+}
+star.i = function(p) {
+    return p.readInt();
+}
+star.f = function(p) {
+    return p.readFloat();
+}
+star.p = function(p) {
+    return p.readDouble();
 }
 
 
