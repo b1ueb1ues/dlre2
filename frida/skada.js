@@ -19,6 +19,19 @@ offset.ingameuictrl.setmovein
     }
 });
 
+// save the day
+hook(offset.maingameleavealonechecker.setleavealonetime, {
+    onEnter: function(args){
+        this.tis = args[0];
+        send('unsetleavealone',tstderr);
+    },
+    onLeave: function(retval){
+        var tis = this.tis;
+        tis.add(offset.maingameleavealonechecker.warnningtime).writeFloat(100000);
+        tis.add(offset.maingameleavealonechecker.exittime).writeFloat(100000);
+    }
+});
+
 /**
  * send t0 first
  */
@@ -78,17 +91,12 @@ function at2name(at){
 
 
 //send('self/team,[,ctype,::,cid,didx,dposition,multiplay_id,multiplay_index,],<actionid>,<skillid>,iscrit,dmg');
-function recount(type, dmg, iscrit, src, dst, actionid, skillid){
+function recount(type, dot, dmg, iscrit, src, dst, actionid, skillid){
     var o_cb = offset.characterbase;
     var o_cha = offset.collisionhitattribute;
     var o_ci = offset.characterid;
     var o_dragon = offset.dragoncharacter
-    var dot = 0;
     var buff = 0;
-
-    if (type == 'cb::apsd') {
-        dot = 1;
-    }
 
     if(dot){
         skillid = at2name(actionid);
@@ -153,7 +161,6 @@ function recount(type, dmg, iscrit, src, dst, actionid, skillid){
     }
     skada +=': ,' + dmg;
     send(skada);
-    //console.log(skada);
 }
 
 
@@ -183,23 +190,22 @@ offset.maingamectrl.playqueststart,
 });
 
 
-//characterbase$$applyslipdamage
-hook(offset.characterbase.applyslipdamage, {
+hook(
+offset.characterbase.calcabnormalstatusdamage,
+{
     onEnter: function(args){
-        //console.log('cb::asd');
         var dst = args[0];
         //var src = args[1]; //attacker can be multiplayer
         var dmg = args[2];
-        var abt = args[3];
+        var abt = args[4];
 
         var at = abt.toInt32();
         var damage = dmg.toInt32();
-        recount('cb::apsd', damage, 0, dst, dst, abt, 0); 
-    },
-    onLeave: function(retval){
-        retval.replace(attack);
+
+        recount('cb::casd',1, damage, 0, dst, dst, abt, 0); 
     }
 });
+
 
 //CharacterBase$$ApplyDamage
 hook(offset.characterbase.applydamage, {
@@ -223,8 +229,8 @@ hook(offset.characterbase.applydamage, {
         var iscrit = attackhit.add(  o_ah.iscrit  ).readU8();
         var actionid = cha.add( o_cha.actionid  ).readInt();
         var skillid =  cha.add( o_cha.skillid   ).readInt();
-        var src = arrow(cha,  o_cha.owner );  
-        recount('cb::admg',damage,iscrit,src,tis, actionid, skillid);
+        var src = follow(cha,  o_cha.owner );  
+        recount('cb::admg', 0, damage,iscrit,src,tis, actionid, skillid);
     },
     onLeave: function(retval){
     }
@@ -254,7 +260,7 @@ offset.characterbufftriggerreactionbomb.execdebuffextradamage
             offset.actioncontainer.actionid
         ).readS32();
         
-        recount('cbtrb::eded', damage, 0, src, dst, actionid, 0);
+        recount('cbtrb::eded', 0, damage, 0, src, dst, actionid, 0);
     },
     onLeave: function(ret){
     }
@@ -376,17 +382,3 @@ if(attack){
     });
 }
 
-
-// afk
-hook(offset.maingameleavealonechecker.setleavealonetime, {
-    onEnter: function(args){
-        this.tis = args[0];
-        send('unsetleavealone',tstderr);
-        //console.log('setleavealone');
-    },
-    onLeave: function(retval){
-        var tis = this.tis;
-        tis.add(offset.maingameleavealonechecker.warnningtime).writeFloat(100000);
-        tis.add(offset.maingameleavealonechecker.exittime).writeFloat(100000);
-    }
-});

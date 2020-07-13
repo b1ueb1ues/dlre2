@@ -1,40 +1,40 @@
 var ctx = {};
 
-hook(
-offset.characterbufftriggerreactionbomb.execdebuffextradamage
-,{
-    onEnter: function(args) {
-        var tis = args[0];
-        var p_br = args[1];
-        var damage = p_br.add(
-            offset.buffrecord.damage
-        ).readS32();
-        var dst = p_br.add(
-            offset.buffrecord.dst
-        ).readPointer();
-        var src = p_br.add(
-            offset.buffrecord.src
-        ).readPointer();
-
-        var actioncontainer = tis.add(
-            offset.characterbufftriggerreactionbomb.container
-        ).readPointer();
-        var actionid = actioncontainer.add(
-            offset.actioncontainer.actionid
-        ).readS32();
-        
-        this.attr = tis.add(0x28).readPointer();
-        //var _id = this.attr.add(0xb8).readPointer();
-        //console.log(hexdump(_id));
-        var coef = this.attr.add(
-            offset.damagecalculation.coef
-            ).readFloat();
-        console.log('\ndmgcoef: '+coef);
-        console.log('cbtrb::eded', damage, 0, src, dst, actionid, 0);
-    },
-    onLeave: function(ret){
-    }
-});
+//hook(
+//offset.characterbufftriggerreactionbomb.execdebuffextradamage
+//,{
+//    onEnter: function(args) {
+//        var tis = args[0];
+//        var p_br = args[1];
+//        var damage = p_br.add(
+//            offset.buffrecord.damage
+//        ).readS32();
+//        var dst = p_br.add(
+//            offset.buffrecord.dst
+//        ).readPointer();
+//        var src = p_br.add(
+//            offset.buffrecord.src
+//        ).readPointer();
+//
+//        var actioncontainer = tis.add(
+//            offset.characterbufftriggerreactionbomb.container
+//        ).readPointer();
+//        var actionid = actioncontainer.add(
+//            offset.actioncontainer.actionid
+//        ).readS32();
+//        
+//        this.attr = tis.add(0x28).readPointer();
+//        //var _id = this.attr.add(0xb8).readPointer();
+//        //console.log(hexdump(_id));
+//        var coef = this.attr.add(
+//            offset.damagecalculation.coef
+//            ).readFloat();
+//        console.log('\ndmgcoef: '+coef);
+//        console.log('cbtrb::eded', damage, 0, src, dst, actionid, 0);
+//    },
+//    onLeave: function(ret){
+//    }
+//});
 
 
 

@@ -91,6 +91,8 @@ offset.characterbase.recoverysp = #CharacterBase$$RecoverySp,1#;  // (int value)
 offset.characterbase.isinvincibleonhitcheck = #CharacterBase$$IsInvincibleOnHitCheck#;
 offset.characterbase.applydamage = #CharacterBase$$ApplyDamage#;
 offset.characterbase.applyslipdamage = #CharacterBase$$ApplySlipDamage#;
+offset.characterbase.calcabnormalstatusdamage = #CharacterBase$$CalcAbnormalStatusDamage#;
+
 offset.characterbase.setabnormalstatus = #CharacterBase$$SetAbnormalStatus#;
 offset.characterbase.getmaxsp = #CharacterBase$$GetMaxSp#;
 
@@ -121,16 +123,16 @@ offset.ingameuictrl.setmovein = #InGameUICtrl$$SetMoveIn#;
  * return address
  */
 offset.characterbase.ret = {};
-offset.characterbase.ret.get_attack_2_dc_cbd = 0x01848238;  // to calculationbasedamage
+offset.characterbase.ret.get_attack_2_dc_cbd = 0x018442e0;  // to calculationbasedamage
 offset.random.ret = {};
-offset.random.ret.rangeint_2_dc_cbd = 0x018484f0;   // calculationbasedamage
-offset.random.ret.rangefloat_2_dc_calculation = 0x01846a0c;   // calculation
-offset.random.ret.rangeint_2_cb_ac = 0x023c1ab8;  // characterbuff$$applycommon
+offset.random.ret.rangeint_2_dc_cbd = 0x01844598;   // calculationbasedamage
+offset.random.ret.rangefloat_2_dc_calculation = 0x01842ab4;   // damagecalculation::calculation
+offset.random.ret.rangeint_2_cb_ac = 0x023c4038;  // characterbuff::applycommon
 
 /**
  * manual get
  */
-offset.damagecalculation.coef = 0xf8;  //get from collisionHitAttribute$$get_DamageAdjustment
+offset.damagecalculation.coef = 0xf8;  //get from collisionHitAttribute::get_DamageAdjustment
 offset.collisionhitattribute.actionid = 0xa4;  //get
 offset.collisionhitattribute.charactertype = 0x9c;  //get
 offset.collisionhitattribute.owner = 0x30;  //get

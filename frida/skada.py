@@ -130,7 +130,7 @@ class Team(object):
         return ret
 
     def timing(this):
-        return ',t:{,%.2f,}'%(this.dt)
+        return ',t:{,%.3f,}'%(this.dt)
 
     def dmg_sum(this):
         ret = ',dmg_sum:{'
@@ -184,6 +184,28 @@ def fwrite(f, string):
     f.write(string.encode('utf8'))
 
 teams = {}
+def summ():
+    global teams
+    if teams != {}:
+        sys.stderr.write('\n[+] summary:\n')
+        for i in teams:
+            tmp = i.split(':')[1]
+            dsttype = tmp[1]
+            if dsttype != '1':
+                continue
+            t = teams[i]
+            timing = t.timing()
+            cur = t.dps_current()
+            total = t.dps_total()
+            _sum = t.dmg_sum()
+            src = t.dps_src()
+            teaminteamno = ',idx:{'
+            for k in t.midx:
+                teaminteamno += ' %02d'%(k)
+            teaminteamno += '}'
+            sys.stderr.write(i+','+timing[1:]+teaminteamno+src+total+_sum+'\n')
+    teams = {}
+
 def on_message(message, data):
     global teams
     global t0
@@ -193,7 +215,7 @@ def on_message(message, data):
         if data == '1' or data == b'1':
             t0 = int(message['payload'])
             t0 = t0 / 10000 / 1000 + 3
-            teams = {}
+            summ()
             return
         if data == '0' or data == b'0':
             reset()
@@ -278,13 +300,16 @@ def on_message(message, data):
         if fout:
             fwrite(fout, p+'\n')
         else:
-            print(p.encode('utf8'))
+            print(p)
         #debug{
         if line[4] == '0' and dsttype=='1':
-            sys.stderr.write(timing[1:]+teaminteamno+src+total+_sum+'\n')
+            #sys.stderr.write(timing[1:]+',dst:'+dstid+teaminteamno+src+total+_sum+'\n')
+            sys.stderr.write(timing[1:]+teaminteamno+src+total+'\n')
         #}debug
     else:
         print(message)
+
+
 
 if __name__ == '__main__':
     import os
@@ -298,11 +323,16 @@ if __name__ == '__main__':
     get_symbol()
     reset()
     zaga.run('skada.js', on_message)
-    while 1:
-        input()
-        sys.stderr.write('fclose\n')
-        if fout:
-            fout.close()
-        fout = None
+    try:
+        while 1:
+            input()
+            sys.stderr.write('fclose\n')
+            if fout:
+                fout.close()
+            fout = None
+            summ()
+    except:
+        summ()
+        exit()
 
 
