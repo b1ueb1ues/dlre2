@@ -6,17 +6,17 @@ gl.sp();
 gl.dummy();
 
 function showresist(resists){
-        var poi = resists.add(0x20+1*4).readFloat();
-        var bur = resists.add(0x20+2*4).readFloat();
-        var fre = resists.add(0x20+3*4).readFloat();
-        var par = resists.add(0x20+4*4).readFloat();
-        var dar = resists.add(0x20+5*4).readFloat();
-        var stu = resists.add(0x20+6*4).readFloat();
-        var cur = resists.add(0x20+7*4).readFloat();
+        var poi = resists.add(0x20+1*4).readFloat().toFixed(2);
+        var bur = resists.add(0x20+2*4).readFloat().toFixed(2);
+        var fre = resists.add(0x20+3*4).readFloat().toFixed(2);
+        var par = resists.add(0x20+4*4).readFloat().toFixed(2);
+        var dar = resists.add(0x20+5*4).readFloat().toFixed(2);
+        var stu = resists.add(0x20+6*4).readFloat().toFixed(2);
+        var cur = resists.add(0x20+7*4).readFloat().toFixed(2);
         var reb = 0;
-        var bog = resists.add(0x20+9*4).readFloat();
-        var sle = resists.add(0x20+10*4).readFloat();
-        var fro = resists.add(0x20+11*4).readFloat();
+        var bog = resists.add(0x20+9*4).readFloat().toFixed(2);
+        var sle = resists.add(0x20+10*4).readFloat().toFixed(2);
+        var fro = resists.add(0x20+11*4).readFloat().toFixed(2);
         console.log('poi: '+poi);
         console.log('bur: '+bur);
         console.log('fre: '+fre);
@@ -39,7 +39,6 @@ hook(offset.characterbase.setabnormalstatus,{
         if (condi == 0)
             return;
         ctx.setabs = 1;
-        console.log('in setab');
         //console.log(condi);
         //fun = tis.readPointer().add(0x3ac);
         //console.log(fun);
@@ -63,7 +62,7 @@ hook(offset.characterbase.setabnormalstatus,{
     },
     onLeave: function(retval){
         ctx.setabs = 0;
-        console.log('out setab');
+        console.log('');
         //console.log(this.context.s16)
     }
 });
