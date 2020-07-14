@@ -26,6 +26,8 @@ offset.characterbufftriggerreactionbomb = {};
 offset.actioncontainer = {};
 offset.buffrecord = {};
 offset.ingameuictrl = {};
+offset.ctrloverdrive = {};
+offset.characterbuff = {};
 
 offset.characterbase.characterid = 0x12C;
 offset.characterbase.dungeonpartyindex = 0x134;
@@ -74,6 +76,7 @@ offset.buffrecord.damage = 0x48;
 offset.buffrecord.dst = 0x50;
 offset.buffrecord.src = 0x58;
 
+
 /**
  * functions table
  */
@@ -87,6 +90,7 @@ offset.characterbase.get_maxhp = 0x18A82CC;
 offset.characterbase.get_attack = 0x18A8474;
 offset.characterbase.get_defense = 0x18A8508;
 offset.characterbase.get_defcoef = 0x18A8578;
+offset.characterbase.get_hprate = 0x18A8360;
 offset.characterbase.recoverysp = 0x18CC7E8;  // (int value) the first one
 offset.characterbase.isinvincibleonhitcheck = 0x18ACFA4;
 offset.characterbase.applydamage = 0x18C3268;
@@ -110,6 +114,7 @@ offset.random.randomrangeint = 0x35B089C;
 offset.enemyctrl.setaiaction = 0x22C3050;
 
 offset.collisionhitattribute.get_damageadjustment = 0x1C17F80;
+offset.collisionhitattribute.get_tobk = 0x1C17FA8;
 
 offset.chainctrl.add = 0x1B7CCC0;
 
@@ -118,13 +123,21 @@ offset.characterbufftriggerreactionbomb.execdebuffextradamage = 0x21C5AD0;
 offset.ingameuictrl.showdamageui = 0x17530CC;
 offset.ingameuictrl.setmovein = 0x17630C4;
 
+offset.ctrloverdrive.ondamaged = 0x18353F4;
+
+offset.characterbuff.applycommon = 0x23C3C88;
+
+
+/**
+ * dynamic
+ */
+offset.characterbase.ret = {};
+offset.random.ret = {};
 
 /**
  * return address
  */
-offset.characterbase.ret = {};
 offset.characterbase.ret.get_attack_2_dc_cbd = 0x018442e0;  // to calculationbasedamage
-offset.random.ret = {};
 offset.random.ret.rangeint_2_dc_cbd = 0x01844598;   // calculationbasedamage
 offset.random.ret.rangefloat_2_dc_calculation = 0x01842ab4;   // damagecalculation::calculation
 offset.random.ret.rangeint_2_cb_ac = 0x023c4038;  // characterbuff::applycommon

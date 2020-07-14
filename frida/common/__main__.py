@@ -1,16 +1,20 @@
 functions = []
 classes = {}
+ghs = []
 
 def prepare():
-    path_in = '../working/script.py'
+    path_py = '../working/script.py'
     path_cs = '../working/dump.cs'
+    path_gh = '../working/ghidra.out'
     path_out = 'common/symbol.js'
     path_template = 'common/template.js'
 
     global classes
     global functions
-    get_functions(path_in)
+    global ghis
+    get_functions(path_py)
     get_classes(path_cs)
+    get_ghidra(path_gh)
 
     fout = open(path_out,'w')
     for line in open(path_template):
@@ -18,6 +22,8 @@ def prepare():
             lout = func(line)
         elif '@' in line:
             lout = var(line)
+        elif '%s' in line:
+            lout = ghidra(line)
         else:
             lout = line
         print(lout.strip())
@@ -52,9 +58,9 @@ def get_classes(path_cs):
                     classes[c].append(nameaddr)
     return classes
 
-def get_functions(path_in):
+def get_functions(path_py):
     global functions
-    for i in open(path_in, 'rb'):
+    for i in open(path_py, 'rb'):
         i = i.decode()
         if i[:10] != 'SetMethod(':
             continue
@@ -65,6 +71,21 @@ def get_functions(path_in):
         name = an[1].strip()
         functions.append((name, addr))
     return functions
+
+def get_ghidra(path_gh):
+    global ghs
+    for i in open(path_gh, 'rb'):
+        i = i.decode()
+        if i[:2] == '0x':
+            ghs.append(i.strip())
+        elif i[:3] == 'ldr':
+            s = i.find('#')+1
+            e = i.rfind(']')
+            ghs.append(i[s:e])
+
+def ghidra(line):
+    lout = line.replace('%s', ghs.pop(0))
+    return lout
 
 def func(line):
     global functions

@@ -26,6 +26,8 @@ offset.characterbufftriggerreactionbomb = {};
 offset.actioncontainer = {};
 offset.buffrecord = {};
 offset.ingameuictrl = {};
+offset.ctrloverdrive = {};
+offset.characterbuff = {};
 
 offset.characterbase.characterid = @CharacterBase,<characterId>@;
 offset.characterbase.dungeonpartyindex = @CharacterBase,<dungeonPartyIndex>@;
@@ -74,6 +76,7 @@ offset.buffrecord.damage = @BuffRecord,Damage@;
 offset.buffrecord.dst = @BuffRecord,TargetChara@;
 offset.buffrecord.src = @BuffRecord,BuffAppender@;
 
+
 /**
  * functions table
  */
@@ -87,6 +90,7 @@ offset.characterbase.get_maxhp = #CharacterBase$$get_maxHp#;
 offset.characterbase.get_attack = #CharacterBase$$get_attack#;
 offset.characterbase.get_defense = #CharacterBase$$get_defense#;
 offset.characterbase.get_defcoef = #CharacterBase$$get_defCoef#;
+offset.characterbase.get_hprate = #CharacterBase$$get_hpRate#;
 offset.characterbase.recoverysp = #CharacterBase$$RecoverySp,1#;  // (int value) the first one
 offset.characterbase.isinvincibleonhitcheck = #CharacterBase$$IsInvincibleOnHitCheck#;
 offset.characterbase.applydamage = #CharacterBase$$ApplyDamage#;
@@ -110,6 +114,7 @@ offset.random.randomrangeint = #Random$$RandomRangeInt#;
 offset.enemyctrl.setaiaction = #EnemyCtrl$$SetAIAction#;
 
 offset.collisionhitattribute.get_damageadjustment = #CollisionHitAttribute$$get_DamageAdjustment#;
+offset.collisionhitattribute.get_tobk = #CollisionHitAttribute$$get_ToBreakDmgRate#;
 
 offset.chainctrl.add = #ChainCtrl$$Add#;
 
@@ -118,22 +123,30 @@ offset.characterbufftriggerreactionbomb.execdebuffextradamage = #CharacterBuffTr
 offset.ingameuictrl.showdamageui = #InGameUICtrl$$ShowDamageUI#;
 offset.ingameuictrl.setmovein = #InGameUICtrl$$SetMoveIn#;
 
+offset.ctrloverdrive.ondamaged = #CtrlOverdrive$$OnDamaged#;
+
+offset.characterbuff.applycommon = #CharacterBuff$$ApplyCommon#;
+
+
+/**
+ * dynamic
+ */
+offset.characterbase.ret = {};
+offset.random.ret = {};
 
 /**
  * return address
  */
-offset.characterbase.ret = {};
-offset.characterbase.ret.get_attack_2_dc_cbd = 0x018442e0;  // to calculationbasedamage
-offset.random.ret = {};
-offset.random.ret.rangeint_2_dc_cbd = 0x01844598;   // calculationbasedamage
-offset.random.ret.rangefloat_2_dc_calculation = 0x01842ab4;   // damagecalculation::calculation
-offset.random.ret.rangeint_2_cb_ac = 0x023c4038;  // characterbuff::applycommon
+offset.characterbase.ret.get_attack_2_dc_cbd = %s;  // to calculationbasedamage
+offset.random.ret.rangeint_2_dc_cbd = %s;   // calculationbasedamage
+offset.random.ret.rangefloat_2_dc_calculation = %s;   // damagecalculation::calculation
+offset.random.ret.rangeint_2_cb_ac = %s;  // characterbuff::applycommon
 
 /**
  * manual get
  */
-offset.damagecalculation.coef = 0xf8;  //get from collisionHitAttribute::get_DamageAdjustment
-offset.collisionhitattribute.actionid = 0xa4;  //get
-offset.collisionhitattribute.charactertype = 0x9c;  //get
-offset.collisionhitattribute.owner = 0x30;  //get
-offset.collisionhitattribute.skillid = 0xa8;  //get  !!!!!
+offset.damagecalculation.coef = %s;  //get from collisionHitAttribute::get_DamageAdjustment
+offset.collisionhitattribute.actionid = %s;  //get
+offset.collisionhitattribute.charactertype = %s;  //get
+offset.collisionhitattribute.owner = %s;  //get
+offset.collisionhitattribute.skillid = %s;  //get  !!!!!

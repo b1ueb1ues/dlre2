@@ -86,53 +86,53 @@ gl.sp = function (sp) {
 
 
 gl.rangeint = function (crit, proc) {
-hook(
-offset.random.randomrangeint
-,{  //random$$range (int)
-    onEnter: function(args){
-        var bt = Thread.backtrace(this.context);
-        var dc_cbd = lib_base.add(
-            offset.random.ret.rangeint_2_dc_cbd
-        ).toString();
-        var cbuf_ac  = lib_base.add(
-            offset.random.ret.rangeint_2_cb_ac
-        ).toString();  //characterbuff applycommon
+    hook(
+    offset.random.randomrangeint
+    ,{  //random$$range (int)
+        onEnter: function(args){
+            var bt = Thread.backtrace(this.context);
+            var dc_cbd = lib_base.add(
+                offset.random.ret.rangeint_2_dc_cbd
+            ).toString();
+            var cbuf_ac  = lib_base.add(
+                offset.random.ret.rangeint_2_cb_ac
+            ).toString();  //characterbuff applycommon
+            //var pc_sas  = lib_base.add(
+            //).toString(); //setactionskill
 
-        var caller = bt[0].toString()
-        if (caller == dc_cbd) {
-            this.dc_cbd = 1;
-            //console.log('->->->->');
-            //console.log('//////rangeint in calculatebasedamage');
-            //console.log(args[0]);
-            //console.log(args[1]);
-        } else if (caller == cbuf_ac){
-            this.cbuf_ac = 1;
-        } else{
-            //console.log('r:rri else:'+ptr(bt[0]).add(0-lib_base));
+            var caller = bt[0].toString()
+            if (caller == dc_cbd) {
+                this.dc_cbd = 1;
+            } else if (caller == cbuf_ac){
+                this.cbuf_ac = 1;
+            //} else if (caller == pc_sas) {
+            //    this.pc_sas = 1;
+            } else{
+                //console.log('r:rri else:'+ptr(bt[0]).add(0-lib_base));
+            }
+        },
+        onLeave: function(ret){
+            if (this.dc_cbd ) {
+                console.log('r:rri dc_cbd: '+ret);
+                if (crit!==null)
+                    ret.replace(crit);
+            }
+            if (this.cbuf_ac ) {
+                console.log('r:rri cb_ac: '+ret);
+                if (proc!==null)
+                    ret.replace(proc);
+            }
+            //if (this.pc_sas ) {
+            //    console.log('r:rri pc_sas: '+ret);
+            //    ret.replace(95);
+            //}
         }
-        //var pc_sas  = lib_base.add(0x0181f198).toString(); //setactionskill
-        //if (caller == pc_sas){
-        //    this.pc_sas = 1;
-        //
-    },
-    onLeave: function(ret){
-        if (this.dc_cbd ) {
-            console.log('r:rri dc_cbd: '+ret);
-            ret.replace(crit);
-        }
-        if (this.cbuf_ac ) {
-            console.log('r:rri cb_ac: '+ret);
-            ret.replace(proc);
-        }
-        //if (this.pc_sas ) {
-        //    console.log('r:rri pc_sas: '+ret);
-        //    ret.replace(95);
-        //}
-    }
-});
+    });
 }
 
-gl.rangefloat = function () {
+gl.rangefloat = function (dcc) {
+    if (!dcc) 
+        dcc = 1.0;
     hook(
     offset.random.rangefloat
     ,{  //random$$range float
@@ -144,33 +144,18 @@ gl.rangefloat = function () {
             ).toString();
 
             if (bt[0].toString() == dc_c) {
-                var p1 = ptr(this.context.sp-128-16);
-                var p2 = ptr(this.context.sp-128);
-                //console.log('p1:'+p1.readFloat());
-                //console.log('p2:'+p2.readFloat());
-                p1.writeInt(0x3f800000);
-                p2.writeInt(0x3f800000);
-                console.log('replace randomfloat');
-
-              //  console.log("dc_c");
-              //  //for (var i in this.context) {
-              //  //    console.log(i+":"+this.context[i]);
-              //  //}
-                //var fp = ptr(this.context.fp);
-               // console.log("sp");
-               // var sp = ptr(this.context.sp-128-16);
-               // var sp = ptr(this.context.sp-256);
-               // console.log(sp.readByteArray(256));
+                this.dcc = 1;
             }
             else{
-                //console.log('rrf else:'+ptr(bt[0]).add(0-lib_base));
-                //var p1 = ptr(this.context.sp-128-16);
-                //var p2 = ptr(this.context.sp-128);
-                //p1.writeInt(0x3f800000);
-                //p2.writeInt(0x3f800000);
             }
         },
         onLeave: function(ret){
+            if (this.dcc) {
+                var p1 = ptr(this.context.sp-0x80-0x10);
+                var o = p1.readFloat();
+                p1.writeFloat(dcc);
+                console.log('rangefloat:', o.toFixed(2), '->', dcc);
+            }
         }
     });
 }
