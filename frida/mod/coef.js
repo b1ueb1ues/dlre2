@@ -5,7 +5,7 @@ gl.rangefloat();
 gl.invincible();
 gl.dummy();
 
-if (0)
+if (1)
 hook( // CollisionHitAttribute$$get_DamageAdjustment
 offset.collisionhitattribute.get_damageadjustment
 ,{ 
@@ -14,10 +14,8 @@ offset.collisionhitattribute.get_damageadjustment
         console.log('coef:', arrow.f(tis, 0xf8));
     },
     onLeave: function(ret){
-        var r = ptr(this.context.sp-0x100+0x70);
-        r.writeFloat(0.01);
-        //var sp = ptr(this.context.sp-256);
-        //console.log(sp.readByteArray(256));
+        //var r = ptr(this.context.sp-0x100+0x70);
+        //r.writeFloat(0.01);
     }
 });
 
@@ -30,7 +28,6 @@ offset.characterbase.get_hprate
     onLeave: function(ret){
         var r = ptr(this.context.sp-0x100+0x70);
         //r.writeFloat(0.01); //3537
-        //r.writeFloat(0.1); //4127
         //r.writeFloat(0.5); //6069
         //r.writeFloat(1); //6936
     }
