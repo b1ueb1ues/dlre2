@@ -19,7 +19,7 @@ def get(a):
     disassemble(p_dat)
     c_dat = listing.getCodeUnitAt(p_dat)
     b = str(c_dat)
-    fw.write('[%s]\n%s\n'%(a,b))
+    fw.write('[%s]\n%s\n\n'%(a,b))
     return b
 
 def finda2b(a, b):
@@ -36,7 +36,7 @@ def finda2b(a, b):
             label = c_to.getLabel()
             if label == a:
                 c = '0x'+str(p_dat.add(4))
-                fw.write('[%s][%s]\n%s\n'%(a,b,c))
+                fw.write('[%s][%s]\n%s\n\n'%(a,b,c))
                 return c
 
         p_dat = p_dat.add(4)

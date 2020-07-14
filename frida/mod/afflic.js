@@ -16,6 +16,7 @@ function showresist(resists){
         var reb = 0;
         var bog = resists.add(0x20+9*4).readFloat();
         var sle = resists.add(0x20+10*4).readFloat();
+        var fro = resists.add(0x20+11*4).readFloat();
         console.log('poi: '+poi);
         console.log('bur: '+bur);
         console.log('fre: '+fre);
@@ -25,6 +26,7 @@ function showresist(resists){
         console.log('cur: '+cur);
         console.log('bog: '+bog);
         console.log('sle: '+sle);
+        console.log('fro: '+fro);
 }
 
 //CharacterBase$$SetAbnormalStatus
@@ -34,13 +36,14 @@ hook(offset.characterbase.setabnormalstatus,{
         var attr = args[1];
         var condi = args[2];
         var dmg = args[3];
+        if (condi == 0)
+            return;
         ctx.setabs = 1;
         console.log('in setab');
         //console.log(condi);
         //fun = tis.readPointer().add(0x3ac);
         //console.log(fun);
         //console.log(fun-ilbase);
-
         /*start set resist*/
         var cparam = arrow(tis,
             offset.characterbase.characterparameter
@@ -102,6 +105,9 @@ hook(offset.actionconditionelement.get_rate, {
                 break;
             case 10:
                 this.typestr = 'sleep';
+                break;
+            case 11:
+                this.typestr = 'frost';
                 break;
             case 99:
                 this.typestr = 'all';

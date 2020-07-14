@@ -76,9 +76,9 @@ def get_ghidra(path_gh):
     global ghs
     for i in open(path_gh, 'rb'):
         i = i.decode()
-        if i[:2] == '0x':
+        if i.find('0x') == 0 :
             ghs.append(i.strip())
-        elif i[:3] == 'ldr':
+        elif i.find('ldr') == 0 :
             s = i.find('#')+1
             e = i.rfind(']')
             ghs.append(i[s:e])
