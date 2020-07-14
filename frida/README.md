@@ -13,7 +13,7 @@ use os redirect to file:
 ```
 python3 skada.py > recount/out.csv
 ```
-use build-in file output, this method will split each fight into out.2.csv out.3.csv ...
+use build-in file output, this method will split each fight into recount/out.2.csv recount/out.3.csv ...
 ```    
-python3 skada.py recount/out.csv
+python3 skada.py out
 ```

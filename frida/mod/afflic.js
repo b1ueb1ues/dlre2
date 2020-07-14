@@ -2,6 +2,9 @@ var c = 1;
 
 var ctx = {};
 
+gl.sp();
+gl.dummy();
+
 function showresist(resists){
         var poi = resists.add(0x20+1*4).readFloat();
         var bur = resists.add(0x20+2*4).readFloat();
@@ -39,13 +42,13 @@ hook(offset.characterbase.setabnormalstatus,{
         //console.log(fun-ilbase);
 
         /*start set resist*/
-        var cparam = follow(tis,
+        var cparam = arrow(tis,
             offset.characterbase.characterparameter
         );
-        var paramtotal = follow(cparam,
+        var paramtotal = arrow(cparam,
             offset.characterparameter.fptotal
         );
-        var resists = follow(paramtotal,
+        var resists = arrow(paramtotal,
             offset.fluctuationparameter.abnormalresist
         );
         //console.log(resists.add(0x10).readByteArray(11*4));
@@ -112,61 +115,4 @@ hook(offset.actionconditionelement.get_rate, {
         console.log('proctype: '+this.typestr);
     }
 });
-
-
-
-if(0){
-    // CharacterBase$$IsInvincibleOnHitCheck
-    hook(offset.characterbase.isinvincibleonhitcheck, { 
-        onEnter: function(args){
-            var o_cb = offset.characterbase;
-            var o_cha = offset.collisionhitattribute;
-
-            var cb = args[0];          //characterbase owner
-            var p_ct = cb.add(o_cb.charactertype); 
-            var ct = p_ct.readInt();   //charactertype
-            this.ct = ct;
-
-            var cha = args[1];
-            var ahet = cha.add(o_cha.actionhitexectype).readInt();
-            this.ahet = ahet;
-            //console.log('actionhitexectype: '+ahet);
-        },
-        onLeave: function(ret){
-            if(this.ct == 0){
-                if(this.ahet == 1){
-                    ret.replace(1);
-                }
-            }
-        }
-    });
-}
-
-hook(
-offset.characterbase.recoverysp
-,{
-    onEnter: function(args){
-        console.log('** sp: '+args[1].toInt32());
-        this.context.x1 = 20000;
-    },
-    onLeave: function(ret){
-    }
-
-});
-
-
-
-if(0){
-    hook(
-    offset.enemyctrl.setaiaction
-    ,{
-        onEnter: function(args){
-            //console.log('onEnter:'+args[0]); //+args[0]);
-            this.context.x1 = 0;
-        },
-        onLeave: function(ret){
-        }
-    });
-}
-
 

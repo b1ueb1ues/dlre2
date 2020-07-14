@@ -1,4 +1,3 @@
-var ctx = {};
 
 hook(
 offset.characterbase.get_maxhp

@@ -26,10 +26,10 @@ offset.random.randomrangeint
 ,{  //random$$range (int)
     onEnter: function(args){
         var bt = Thread.backtrace(this.context);
-        var dc_cbd = ilbase.add(
+        var dc_cbd = lib_base.add(
             offset.random.ret.rangeint_2_dc_cbd
         ).toString();
-        var cbuf_ac  = ilbase.add(
+        var cbuf_ac  = lib_base.add(
             offset.random.ret.rangeint_2_cb_ac
         ).toString();  //characterbuff applycommon
 
@@ -40,7 +40,7 @@ offset.random.randomrangeint
             this.cbuf_ac = 1;
         }
         else{
-            //console.log('rrii else:'+ptr(bt[0]).add(0-ilbase));
+            //console.log('rrii else:'+ptr(bt[0]).add(0-lib_base));
         }
     },
     onLeave: function(ret){
@@ -65,7 +65,7 @@ offset.random.rangefloat
     onEnter: function(args){
         this.spread = 0;
         var bt = Thread.backtrace(this.context)
-        var dc_c = ilbase.add(
+        var dc_c = lib_base.add(
             offset.random.ret.rangefloat_2_dc_calculation
         ).toString();
 
@@ -78,7 +78,7 @@ offset.random.rangefloat
             p2.writeInt(0x3f800000);
             console.log('replace randomfloat');
         }else{
-            //console.log('rrf else:'+ptr(bt[0]).add(0-ilbase));
+            //console.log('rrf else:'+ptr(bt[0]).add(0-lib_base));
             //p1.writeInt(0x3f800000);
             //p2.writeInt(0x3f800000);
         }

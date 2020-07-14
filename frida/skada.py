@@ -5,10 +5,11 @@ TEXTLABEL = 'common/textlabel.asset'
 DPSRANGE = 5
 
 #############################
-import zaga
+import lib
 import time
 import sys
 import re
+import conf
 
 skillname = {}
 charaname = {}
@@ -322,11 +323,11 @@ if __name__ == '__main__':
 
     get_symbol()
     reset()
-    zaga.run('skada.js', on_message)
+    lib.run('skada.js', conf, on_message)
     try:
         while 1:
             input()
-            sys.stderr.write('fclose\n')
+            sys.stderr.write('[+] fclose\n')
             if fout:
                 fout.close()
             fout = None

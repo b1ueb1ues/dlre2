@@ -1,43 +1,8 @@
 var ctx = {};
 
-//hook(
-//offset.characterbufftriggerreactionbomb.execdebuffextradamage
-//,{
-//    onEnter: function(args) {
-//        var tis = args[0];
-//        var p_br = args[1];
-//        var damage = p_br.add(
-//            offset.buffrecord.damage
-//        ).readS32();
-//        var dst = p_br.add(
-//            offset.buffrecord.dst
-//        ).readPointer();
-//        var src = p_br.add(
-//            offset.buffrecord.src
-//        ).readPointer();
-//
-//        var actioncontainer = tis.add(
-//            offset.characterbufftriggerreactionbomb.container
-//        ).readPointer();
-//        var actionid = actioncontainer.add(
-//            offset.actioncontainer.actionid
-//        ).readS32();
-//        
-//        this.attr = tis.add(0x28).readPointer();
-//        //var _id = this.attr.add(0xb8).readPointer();
-//        //console.log(hexdump(_id));
-//        var coef = this.attr.add(
-//            offset.damagecalculation.coef
-//            ).readFloat();
-//        console.log('\ndmgcoef: '+coef);
-//        console.log('cbtrb::eded', damage, 0, src, dst, actionid, 0);
-//    },
-//    onLeave: function(ret){
-//    }
-//});
-
-
-
+gl.sp();
+//gl.invincible();
+gl.dummy();
 if(0){
 hook(
 offset.damagecalculation.calculationbasedamage
@@ -75,11 +40,11 @@ offset.damagecalculation.calculation
         var o_cha = offset.collisionhitattribute;
 
 
-        var p_ds = follow(this.tis, o_dc.normal); //damagestatues normal
+        var p_ds = arrow(this.tis, o_dc.normal); //damagestatues normal
 
         var dmg = p_ds.add(o_ds.value);
 
-        //cb = follow(this.attr,0x24); //characterbase owner
+        //cb = arrow(this.attr,0x24); //characterbase owner
         //ct = cb.add(0xb8).readInt(); //charactertype
         var ct = this.attr.add(o_cha.charactertype).readInt();
 
@@ -99,7 +64,6 @@ offset.damagecalculation.calculation
 });
 }
 
-
 if(1){
 hook(
 offset.characterbase.get_attack
@@ -107,37 +71,13 @@ offset.characterbase.get_attack
     onEnter: function(args){
     },
     onLeave: function(retval){
-        //var bt = Thread.backtrace(this.context)
-        //for (var i in bt){
-        //    bt[i] = ptr(bt[i]).add(-ilbase);
-        //}
-        //console.log(bt);
         var bt = Thread.backtrace(this.context)
-        var cb_ga = ilbase.add(
+        var cb_ga = lib_base.add(
             offset.characterbase.ret.get_attack_2_dc_cbd
         ).toString();
         if (bt[0].toString() == cb_ga) {
             console.log('get_atk: '+retval.toInt32());
         }
-    }
-});
-}
-
-
-if(1){
-hook(
-offset.characterbase.recoverysp
-,{
-    onEnter: function(args){
-        //var bt = Thread.backtrace(this.context);
-        //for (var i in bt){
-        //    console.log('bt resp:'+ptr(bt[i]).add(0-ilbase));
-        //}
-        //console.log(bt);
-        console.log('** sp: '+args[1].toInt32());
-        this.context.x1 = 20000;
-    },
-    onLeave: function(retval){
     }
 });
 }
@@ -158,71 +98,19 @@ offset.characterbase.getmaxsp // getmaxsp
 }
 
 
-
-//hook(
-//offset.collisionhitattribute.get_damageadjustment
-//,{  // DamageCalculation$$GetHitAttributeDependentCoefficient
-//    onEnter: function(args){
-//        var tis = args[0];
-//        var coef = tis.add(0xec).readFloat();
-//        console.log('dmgcoef: '+coef);
-//    },
-//    onLeave: function(ret){
-//    }
-//});
-
-//hook(
-//0x017f8710
-//,{  // CtrlOverdrive::OnDamaged
-//    onEnter: function(args){
-//        this.odhp = ptr(args[0]).add(0x2c)
-//        console.log('ctrlOD_in: '+this.odhp.readFloat());
-//    },
-//    onLeave: function(ret){
-//        if (this.context.x19 != 0){
-//            console.log('ctrlOD_out: '+this.odhp.readFloat());
-//        }
-//    }
-//});
-//
-//if(1){
-//hook(
-//0x01848030
-//,{  // CollisionHitAttribute$$get_ToBreakDmgRate
-//    onEnter: function(args){
-//        bt(this);
-//        console.log('tobkRate: '+args[0].add(0x100).readFloat());
-//    },
-//    onLeave: function(ret){
-//    }
-//});
-//}
-//
-
-//hook(0x00cfec0c,{  // get_chainnum
-//    onEnter: function(args){
-//    },
-//    onLeave: function(ret){
-//        hits = 30;
-//        //console.log('get_chainnum:'+ret+'->'+hits)
-//        ret.replace(hits);
-//    }
-//});
-
-
 if(1){  // control crit
 hook(
 offset.random.randomrangeint
 ,{  //random$$range (int)
     onEnter: function(args){
         var bt = Thread.backtrace(this.context);
-        var dc_cbd = ilbase.add(
+        var dc_cbd = lib_base.add(
             offset.random.ret.rangeint_2_dc_cbd
         ).toString();
-        var cbuf_ac  = ilbase.add(
+        var cbuf_ac  = lib_base.add(
             offset.random.ret.rangeint_2_cb_ac
         ).toString();  //characterbuff applycommon
-        //var pc_sas  = ilbase.add(0x0181f198).toString(); //setactionskill
+        //var pc_sas  = lib_base.add(0x0181f198).toString(); //setactionskill
 
         var caller = bt[0].toString()
         if (caller == dc_cbd) {
@@ -238,7 +126,7 @@ offset.random.randomrangeint
         //    this.pc_sas = 1;
         //
         } else{
-            //console.log('r:rri else:'+ptr(bt[0]).add(0-ilbase));
+            //console.log('r:rri else:'+ptr(bt[0]).add(0-lib_base));
         }
     },
     onLeave: function(ret){
@@ -265,7 +153,7 @@ offset.random.rangefloat
     onEnter: function(args){
         this.spread = 0;
         var bt = Thread.backtrace(this.context)
-        var dc_c = ilbase.add(
+        var dc_c = lib_base.add(
             offset.random.ret.rangefloat_2_dc_calculation
         ).toString();
 
@@ -289,7 +177,7 @@ offset.random.rangefloat
            // console.log(sp.readByteArray(256));
         }
         else{
-            //console.log('rrf else:'+ptr(bt[0]).add(0-ilbase));
+            //console.log('rrf else:'+ptr(bt[0]).add(0-lib_base));
             //var p1 = ptr(this.context.sp-128-16);
             //var p2 = ptr(this.context.sp-128);
             //p1.writeInt(0x3f800000);
@@ -303,42 +191,41 @@ offset.random.rangefloat
 
 
 if(0){
-    // CharacterBase$$IsInvincibleOnHitCheck
-    hook(offset.characterbase.isinvincibleonhitcheck, { 
-        onEnter: function(args){
-            var o_cb = offset.characterbase;
-            var o_cha = offset.collisionhitattribute;
+hook(
+offset.characterbufftriggerreactionbomb.execdebuffextradamage
+,{
+    onEnter: function(args) {
+        var tis = args[0];
+        var p_br = args[1];
+        var damage = p_br.add(
+            offset.buffrecord.damage
+        ).readS32();
+        var dst = p_br.add(
+            offset.buffrecord.dst
+        ).readPointer();
+        var src = p_br.add(
+            offset.buffrecord.src
+        ).readPointer();
 
-            var cb = args[0];          //characterbase owner
-            var p_ct = cb.add(o_cb.charactertype); 
-            var ct = p_ct.readInt();   //charactertype
-            this.ct = ct;
-
-            var cha = args[1];
-            var ahet = cha.add(o_cha.actionhitexectype).readInt();
-            this.ahet = ahet;
-            //console.log('actionhitexectype: '+ahet);
-        },
-        onLeave: function(ret){
-            if(this.ct == 0){
-                if(this.ahet == 1){
-                    ret.replace(1);
-                }
-            }
-        }
-    });
+        var actioncontainer = tis.add(
+            offset.characterbufftriggerreactionbomb.container
+        ).readPointer();
+        var actionid = actioncontainer.add(
+            offset.actioncontainer.actionid
+        ).readS32();
+        
+        this.attr = tis.add(0x28).readPointer();
+        //var _id = this.attr.add(0xb8).readPointer();
+        //console.log(hexdump(_id));
+        var coef = this.attr.add(
+            offset.damagecalculation.coef
+            ).readFloat();
+        console.log('\ndmgcoef: '+coef);
+        console.log('cbtrb::eded', damage, 0, src, dst, actionid, 0);
+    },
+    onLeave: function(ret){
+    }
+});
 }
 
 
-if(1){
-    hook(
-    offset.enemyctrl.setaiaction
-    ,{
-        onEnter: function(args){
-            //console.log('onEnter:'+args[0]); //+args[0]);
-            this.context.x1 = 0;
-        },
-        onLeave: function(ret){
-        }
-    });
-}

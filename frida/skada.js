@@ -229,7 +229,7 @@ hook(offset.characterbase.applydamage, {
         var iscrit = attackhit.add(  o_ah.iscrit  ).readU8();
         var actionid = cha.add( o_cha.actionid  ).readInt();
         var skillid =  cha.add( o_cha.skillid   ).readInt();
-        var src = follow(cha,  o_cha.owner );  
+        var src = arrow(cha,  o_cha.owner );  
         recount('cb::admg', 0, damage,iscrit,src,tis, actionid, skillid);
     },
     onLeave: function(retval){

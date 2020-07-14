@@ -2,10 +2,10 @@ functions = []
 classes = {}
 
 def prepare():
-    path_in = '../working/script.py'
-    path_cs = '../working/dump.cs'
-    path_out = 'common/symbol.js'
-    path_template = 'common/template.js'
+    path_in = '../../working/script.py'
+    path_cs = '../../working/dump.cs'
+    path_out = 'symbol.js'
+    path_template = 'template.js'
 
     global classes
     global functions

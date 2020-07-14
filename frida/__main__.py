@@ -1,21 +1,11 @@
 import sys
-import zaga
-from symbol import prepare as _prepare
+import conf
+import lib
 
-default = 'gl'
-prepare = 0
+if len(sys.argv) > 1:
+    mod = sys.argv[1]
+if '.js' not in mod:
+    mod = 'mod/%s.js'%mod
+lib.run(mod, conf)
+sys.stdin.read()
 
-
-def main(mod, prepare=False):
-    if len(sys.argv) > 1:
-        mod = sys.argv[1]
-    if len(sys.argv) > 2:
-        prepare = True
-    if '.js' not in mod:
-        mod += '.js'
-    if prepare:
-        _prepare()
-    zaga.run('%s'%mod)
-    sys.stdin.read()
-
-main(default, prepare)

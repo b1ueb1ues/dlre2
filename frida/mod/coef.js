@@ -1,8 +1,5 @@
 var ctx = {};
 
-
-
-
 //hook(0xb1be04,{  // CollisionHitAttribute$$get_DamageAdjustment
 //    onEnter: function(args){
 //    },
@@ -18,6 +15,22 @@ var ctx = {};
 //            console.log('toOdRate: '+p2f(retval));
 //    }
 //});
+
+
+//hook(
+//0x017f8710
+//,{  // CtrlOverdrive::OnDamaged
+//    onEnter: function(args){
+//        this.odhp = ptr(args[0]).add(0x2c)
+//        console.log('ctrlOD_in: '+this.odhp.readFloat());
+//    },
+//    onLeave: function(ret){
+//        if (this.context.x19 != 0){
+//            console.log('ctrlOD_out: '+this.odhp.readFloat());
+//        }
+//    }
+//});
+
 
 //747  980  0.1 2147  0.5 1400 0.7 1187 0.8 1120 0.9 1080  1.0 1067 
 //0       2401
@@ -137,63 +150,6 @@ offset.random.randomrangeint
 });
 }
 
-//var mmin = ilbase.add(0x03612630); //0.95
-//var mmax = ilbase.add(0x0360f040); //1.05
-//console.log(mmin.toString());
-//console.log(mmin.readByteArray(4));
-//console.log(mmax.toString());
-//console.log(mmax.readByteArray(8));
-//mmin.writeFloat(1.0);
-//mmax.writeFloat(1.0);
-//7f703c757c
-
-//var s0 = ilbase.add(0x017dfd40);
-//var s1 = ilbase.add(0x017dfd44);
-//console.log(s0.readByteArray(32));
-//console.log(s1.readByteArray(32));
-//var s0writer = new Arm64Writer(s0);
-//var s1writer = new Arm64Writer(s1);
-//s0writer.putInstruction(0x1e2e1000);
-//s1writer.putInstruction(0x1e2e1001);
-
-
-function spread() {
-    var impl = Memory.alloc(Process.pageSize);
-    Memory.patchCode(impl, Process.pageSize, function (code) {
-        var arm64Writer = new Arm64Writer(code, { pc: impl });
-        arm64Writer.putInstruction(0x1e2e1000);
-        arm64Writer.putInstruction(0x1e2e1001);
-        arm64Writer.putInstruction(0xaa1f03e1);
-        arm64Writer.putInstruction(0xd65f03c0);
-    });
-    var f = new NativeFunction(impl, 'void', []);
-    f();
-
-}
-
-if(0){
-hook(
-0x02ad02b8
-,{  //random$$range (int)
-    onEnter: function(args){
-
-        var bt = Thread.backtrace(this.context);
-        var dc_cbd = ilbase.add(0x017e0eb4).toString();
-        if (bt[0].toString() == dc_cbd) {
-            this.dc_cbd = 1;
-            console.log('->->->->');
-            console.log('//////rangeint in calculatebasedamage');
-            console.log(args[0]);
-            console.log(args[1]);
-        }
-    },
-    onLeave: function(ret){
-        if (this.dc_cbd ) {
-            console.log('ret: '+ret);
-        }
-    }
-});
-}
 
 if(1){
 hook(
@@ -212,17 +168,6 @@ offset.random.rangefloat
             //console.log('p2:'+p2.readFloat());
             p1.writeInt(0x3f800000);
             p2.writeInt(0x3f800000);
-
-          //  console.log("dc_c");
-          //  //for (var i in this.context) {
-          //  //    console.log(i+":"+this.context[i]);
-          //  //}
-          //  console.log("sp");
-          //  var sp = ptr(this.context.sp-128-16);
-          //  var fp = ptr(this.context.fp);
-          //  console.log(sp.readByteArray(256));
-
-
         }
     },
     onLeave: function(retval){
