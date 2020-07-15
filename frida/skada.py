@@ -145,6 +145,7 @@ class Team(object):
         ret += ',}'
         return ret
 
+
     def dps_current(this):
         ret = ',dps_cur:{'
         n = 5
@@ -160,7 +161,31 @@ class Team(object):
     def dps_src(this):
         ret = ',['
         for i in this.midx:
-            ret += ' '+this.member[i].name
+            ret += this.member[i].name + ' '
+        ret = ret[:-1] + ']'
+        return ret
+
+    def name_dps(this):
+        ret = 'dps:['
+        tmp = this.midx[:]
+        tmp.sort()
+        for i in tmp:
+            if i != -2:
+                m = this.member[i]
+                ret += '%s:%s, '%(m.name, m.dps_total())
+        if -2 in tmp:
+            ret += 'dot:'+this.member[-2].dps_total()
+        else:
+            ret += 'dot:0'
+        ret += '], dmg:['
+        for i in tmp:
+            if i != -2:
+                m = this.member[i]
+                ret += '%s, '%(m.dmg_sum())
+        if -2 in tmp:
+            ret += this.member[-2].dmg_sum()
+        else:
+            ret += '0'
         ret += ']'
         return ret
 
@@ -191,20 +216,14 @@ def summ():
         sys.stderr.write('\n[+] summary:\n')
         for i in teams:
             dstid, tmp = i.split(':')
+            teamid, dstid = dstid.split('->')
             dsttype = tmp[1]
             if dsttype != '1':
                 continue
             t = teams[i]
-            timing = t.timing()
-            cur = t.dps_current()
-            total = t.dps_total()
-            _sum = t.dmg_sum()
-            src = t.dps_src()
-            teaminteamno = ',idx:{'
-            for k in t.midx:
-                teaminteamno += ' %02d'%(k)
-            teaminteamno += '}'
-            sys.stderr.write(dstid+','+timing[1:]+teaminteamno+src+total+_sum+'\n')
+            timing = t.dt
+            name_dps = t.name_dps()
+            sys.stderr.write('team:%s, dst:%s, t:%.2fs, %s\n'%(teamid,dstid, timing, name_dps))
     teams = {}
 
 def on_message(message, data):
@@ -212,13 +231,18 @@ def on_message(message, data):
     global t0
     global skillname, charaname, enemyskill
     global fout
-    if message['type'] == 'send':
+    if message['type'] == 'send' :
         if data == '1' or data == b'1':
-            t0 = int(message['payload'])
-            t0 = t0 / 10000 / 1000 + 3
-            summ()
+            if t0:
+                t0 = int(message['payload'])
+                t0 = t0 / 10000 / 1000 + 3.6
+            else:
+                t0 = int(message['payload'])
+                t0 = t0 / 10000 / 1000
+            #summ()
             return
         if data == '0' or data == b'0':
+            summ()
             reset()
             if fout:
                 fwrite(fout, message['payload']+'\n')
@@ -292,8 +316,8 @@ def on_message(message, data):
         teaminteamno = ''
         teaminteamno += ',team['+teamno+']:{'
         for k in t.midx:
-            teaminteamno += ' %02d'%(k)
-        teaminteamno += '}'
+            teaminteamno += '%02d '%(k)
+        teaminteamno = teaminteamno[:-1] + '}'
         
         tmp += teaminteamno
 
