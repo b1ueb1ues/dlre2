@@ -177,17 +177,21 @@ class Team(object):
             ret += 'dot:'+this.member[-2].dps_total()
         else:
             ret += 'dot:0'
-        ret += '], dmg:['
+        ret += ']'
+        ret2 = 'dmg:['
         for i in tmp:
             if i != -2:
                 m = this.member[i]
-                ret += '%s, '%(m.dmg_sum())
+                #ret2 += '%s:%s, '%(m.name, m.dmg_sum())
+                ret2 += '%s, '%(m.dmg_sum())
         if -2 in tmp:
-            ret += this.member[-2].dmg_sum()
+            #ret2 += 'dot:'+this.member[-2].dmg_sum()
+            ret2 += this.member[-2].dmg_sum()
         else:
-            ret += '0'
-        ret += ']'
-        return ret
+            #ret2 += 'dot:0'
+            ret2 += '0'
+        ret2 += ']'
+        return ret, ret2
 
 
 def reset():
@@ -222,8 +226,8 @@ def summ():
                 continue
             t = teams[i]
             timing = t.dt
-            name_dps = t.name_dps()
-            sys.stderr.write('team:%s, dst:%s, t:%.2fs, %s\n'%(teamid,dstid, timing, name_dps))
+            name_dps, dmg_sum = t.name_dps()
+            sys.stderr.write('dst:%s, team:%s, t:%.2fs\n\t%s\n\t%s\n\n'%(dstid, teamid, timing, name_dps, dmg_sum))
     teams = {}
 
 def on_message(message, data):
