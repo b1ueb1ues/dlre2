@@ -1,14 +1,16 @@
+import re 
+
+path_py = '../working/script.py'
+path_cs = '../working/dump.cs'
+path_gh = '../working/ghidra.out'
+path_out = 'common/symbol.js'
+path_template = 'common/template.js'
+path_tl = 'common/textlabel.asset'
+
 functions = []
 classes = {}
 ghs = []
-
 def prepare():
-    path_py = '../working/script.py'
-    path_cs = '../working/dump.cs'
-    path_gh = '../working/ghidra.out'
-    path_out = 'common/symbol.js'
-    path_template = 'common/template.js'
-
     global classes
     global functions
     global ghis
@@ -124,5 +126,53 @@ def var(line):
     return lout
 
 
+
+skillname = {}
+charaname = {}
+enemyskill = {}
+def get_symbol():
+    global skillname, charaname, enemyskill
+    f = open(path_tl,'rb')
+    data = f.read().decode()
+    tmp = re.findall(r'CHARA_NAME_(\d+)".\n.*_Text = "(.*)"', data)
+    for i in tmp:
+        charaname[i[0]] = i[1]
+    tmp = re.findall(r'CHARA_NAME_COMMENT_(\d+)".\n.*_Text = "(.*)"', data)
+    for i in tmp:
+        charaname[i[0]] = i[1].replace(' ','') \
+                .replace('（','(') \
+                .replace('）',')') \
+                .replace('Ver.','') \
+                .replace('限定','') \
+                .replace(' ','')
+    tmp = re.findall(r'DRAGON_NAME_(\d+)".\n.*_Text = "(.*)"', data)
+    for i in tmp:
+        charaname[i[0]] = i[1]
+    tmp = re.findall(r'DRAGON_NAME_COMMENT_(\d+)".\n.*_Text = "(.*)"', data)
+    for i in tmp:
+        charaname[i[0]] = i[1].replace(' ','') \
+                .replace('（','(') \
+                .replace('）',')') \
+                .replace('Ver.','') \
+                .replace('限定','') \
+                .replace(' ','')
+
+    tmp = re.findall(r'SKILL_NAME_(\d+)".\n.*_Text = "(.*)"', data)
+    for i in tmp:
+        skillname[i[0]] = i[1]
+    tmp = re.findall(r'ENEMY_SKILL.*_(\d+)".\n.*_Text = "(.*)"', data)
+    for i in tmp:
+        enemyskill[i[0]] = i[1]
+    f.close()
+
+def save_symbol() :
+    global skillname, charaname, enemyskill
+    fout = open('tl.py', 'w')
+
+
+
+
 if __name__ == '__main__':
     prepare()
+    get_symbol()
+    save_symbol()

@@ -10,48 +10,11 @@ import time
 import sys
 import re
 import conf
+from common.tl import skillname, charaname, enemyskill
 
-skillname = {}
-charaname = {}
-enemyskill = {}
 t0 = 0
 fout = None
 fpname = ''
-
-def get_symbol():
-    global skillname, charaname, enemyskill
-    f = open(TEXTLABEL,'rb')
-    data = f.read().decode()
-    tmp = re.findall(r'CHARA_NAME_(\d+)".\n.*_Text = "(.*)"', data)
-    for i in tmp:
-        charaname[i[0]] = i[1]
-    tmp = re.findall(r'CHARA_NAME_COMMENT_(\d+)".\n.*_Text = "(.*)"', data)
-    for i in tmp:
-        charaname[i[0]] = i[1].replace(' ','') \
-                .replace('（','(') \
-                .replace('）',')') \
-                .replace('Ver.','') \
-                .replace('限定','') \
-                .replace(' ','')
-    tmp = re.findall(r'DRAGON_NAME_(\d+)".\n.*_Text = "(.*)"', data)
-    for i in tmp:
-        charaname[i[0]] = i[1]
-    tmp = re.findall(r'DRAGON_NAME_COMMENT_(\d+)".\n.*_Text = "(.*)"', data)
-    for i in tmp:
-        charaname[i[0]] = i[1].replace(' ','') \
-                .replace('（','(') \
-                .replace('）',')') \
-                .replace('Ver.','') \
-                .replace('限定','') \
-                .replace(' ','')
-
-    tmp = re.findall(r'SKILL_NAME_(\d+)".\n.*_Text = "(.*)"', data)
-    for i in tmp:
-        skillname[i[0]] = i[1]
-    tmp = re.findall(r'ENEMY_SKILL.*_(\d+)".\n.*_Text = "(.*)"', data)
-    for i in tmp:
-        enemyskill[i[0]] = i[1]
-    f.close()
 
 class Nilds(object):
     def dps_total(this):
@@ -349,7 +312,6 @@ if __name__ == '__main__':
     else:
         fpname = None
 
-    get_symbol()
     reset()
     lib.run('skada.js', conf, on_message)
     try:
